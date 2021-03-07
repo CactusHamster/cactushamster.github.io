@@ -1,19 +1,77 @@
+
+//Just some fun stuff for when the page loads!
+
+var x = random(1,5)
+switch(x){
+	case 1:
+	console.log('Hi there!'); break;
+	case 2:
+	console.log('Why, hello there!'); break;	
+	case 3:
+	console.log('Hai!'); break;
+	case 4:
+	console.log('🙄✋'); break;
+	case 5:
+	console.log('hehe'); break;
+}
+function chaos (amount) {
+for (i=0; i < amount; i++) {
+drawLine(random(0,1000),random(0,1000),random(0,1000),random(0,1000))
+}
+}
+
+//Page update
+var update = setInterval(Update, 1);
+function Update() {
+
+}
+
+
 //Random number function from w2schools
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-drawLine(0,0,500,500)
-drawLine(0,0,200,300)
+
+//Text making function
+function drawText (beginx, beginy, text, font) {
+	brush.fillStyle = "#FF0000";
+	brush.font = font;
+	brush.strokeText(text, beginx, beginy);
+}
 
 
+//Line drawing function
+function drawLine (beginx, beginy, endx, endy) {
+brush.fillStyle = "#FF0000";
+brush.moveTo(beginx, beginy);
+brush.lineTo(endx, endy);
+brush.stroke();
+}
 
-//Adds ] press event
-this.addEventListener('keypress', event => {
-  if (event.key == '[') {
-    alert('hi.')
-  }
-})
+
+//Rectangle drawing function
+function drawRectangle (beginx, beginy, endx, endy) {
+brush.fillStyle = "#FF0000";
+brush.fillRect(beginx, beginy, endx, endy);
+}
+
+
+//Circle drawing function
+function drawCircle(beginx, beginy, radius) {
+brush.beginPath();
+brush.arc(beginx, beginy, radius, 0, 2 * Math.PI);
+brush.stroke();
+}
+
+
+//Arc drawing function
+function drawArc(beginx, beginy, radius, startAng, endAng) {
+brush.beginPath();
+brush.arc(beginx, beginy, radius, startAng, endAng);
+brush.stroke();
+}
+
 
 
 
@@ -29,7 +87,7 @@ function Time() {
 
 
 //Tells me what canvasclick is at
-var timeVar = setInterval(CanvasClickQuery, 1000);
+var timeVar = setInterval(CanvasClickQuery, 10);
 function CanvasClickQuery() {
   document.getElementById("click").innerHTML = canvasclick;
 }
@@ -37,40 +95,18 @@ function CanvasClickQuery() {
 
 
 
-//Page update
-var update = setInterval(Update, 1);
-function Update() {
-
-}
 
 
 
 
 
-console.log('Hai there')
-
-brush.font = "30px Arial";
-brush.strokeText("Hai", 10, 50);
-
-
-function drawLine (beginx, beginy, endx, endy) {
-brush.moveTo(beginx, beginy);
-brush.lineTo(endx, endy);
+function paint() {
+brush.fillStyle = "#FF0000";
+brush.beginPath();
+brush.arc(mouseX, mouseY, (paintSize*5), 0, 2 * Math.PI);
 brush.stroke();
 }
 
 
-function paint() {
-
-		
-}
-
-
-
-
-
-function canvasDraw() {
-console.log('Canvas was clicked!')	
-}
 
 

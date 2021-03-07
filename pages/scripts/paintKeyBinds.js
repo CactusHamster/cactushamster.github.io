@@ -1,12 +1,12 @@
 this.addEventListener('keypress', event => {
-  if (event.keyCode == 13) {
-    alert('hi.')
+  if (event.key == '[') {
+	  if (paintsize > 1) {paintsize = paintsize-1}
   }
 })
 
 
 this.addEventListener('keypress', event => {
-  if (event.keyCode == 13) {
-    alert('hi.')
+  if (event.key == ']') {
+    if (paintsize < 100) {paintsize = paintsize+1}
   }
 })
