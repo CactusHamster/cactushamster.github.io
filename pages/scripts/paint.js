@@ -10,7 +10,7 @@ drawLine(0,0,200,300)
 
 //Adds ] press event
 this.addEventListener('keypress', event => {
-  if (event.keyCode == 13) {
+  if (event.key == '[') {
     alert('hi.')
   }
 })
