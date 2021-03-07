@@ -14,9 +14,26 @@
 
 	<body>
 	
-		<canvas id="Canvas" width="1000" height="1000" style="border:1px solid #000000; cursor:url(https://cdn.custom-cursor.com/db/6011/32/kirby-magolor-pointer.png) , pointer!important"></canvas>
-		<p id="time"></p>
-		<p id="click"></p>
+	<canvas id="Canvas" width="1000" height="500" style="border:1px solid #000000; cursor:url(https://cdn.custom-cursor.com/db/6011/32/kirby-magolor-pointer.png) , pointer!important"></canvas>
+	
+	<br>
+	
+	<label>R: </label>
+	<input id="redColor" type="text">
+	
+	<label>G: </label>
+	<input id="greenColor" type="text">
+	
+	<label>B: </label>
+	<input id="blueColor" type="text">
+	
+	<label>A: </label>
+	<input id="alphaColor" type="text">
+	
+	<input  id="colorButton" type="button" value="Change Color">
+		
+	<p id="time"></p>
+	<p id="click"></p>
 		
 		
 		
@@ -32,6 +49,7 @@
 	var canvasclick = false
 	var paintsize = 1
 	var mouseX, mouseY
+	var color
 	</script>
 	
 	

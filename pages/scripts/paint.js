@@ -21,9 +21,12 @@ drawLine(random(0,1000),random(0,1000),random(0,1000),random(0,1000))
 }
 
 //Page update
-var update = setInterval(Update, 1);
-function Update() {
 
+var update = setInterval(Update, 0);
+function Update() {
+	if (canvasclick == true) {
+		paint()
+	}
 }
 
 
@@ -33,9 +36,19 @@ function random(min, max) {
 }
 
 
+//rgba to hex function from StackOverflow
+function rgba2hex (colorString) {
+var color = colorString;   //'rgba(249,6,6,1,0)';
+var rgba = color.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
+var hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2])).toString(16).slice(1)}`;
+console.log(hex);
+return hex
+}
+
+
 //Text making function
 function drawText (beginx, beginy, text, font) {
-	brush.fillStyle = "#FF0000";
+	brush.fillStyle = color;
 	brush.font = font;
 	brush.strokeText(text, beginx, beginy);
 }
@@ -43,7 +56,7 @@ function drawText (beginx, beginy, text, font) {
 
 //Line drawing function
 function drawLine (beginx, beginy, endx, endy) {
-brush.fillStyle = "#FF0000";
+brush.fillStyle = color;
 brush.moveTo(beginx, beginy);
 brush.lineTo(endx, endy);
 brush.stroke();
@@ -52,13 +65,14 @@ brush.stroke();
 
 //Rectangle drawing function
 function drawRectangle (beginx, beginy, endx, endy) {
-brush.fillStyle = "#FF0000";
+brush.fillStyle = color;
 brush.fillRect(beginx, beginy, endx, endy);
 }
 
 
 //Circle drawing function
 function drawCircle(beginx, beginy, radius) {
+brush.fillStyle = color;
 brush.beginPath();
 brush.arc(beginx, beginy, radius, 0, 2 * Math.PI);
 brush.stroke();
@@ -67,6 +81,7 @@ brush.stroke();
 
 //Arc drawing function
 function drawArc(beginx, beginy, radius, startAng, endAng) {
+brush.fillStyle = color;
 brush.beginPath();
 brush.arc(beginx, beginy, radius, startAng, endAng);
 brush.stroke();
@@ -94,17 +109,22 @@ function CanvasClickQuery() {
 
 
 
+colorButton.onclick = function colorChange () {
 
-
-
-
-
+if (redColor.value < 256) {var red = redColor.value} else {var red = 255}
+if (blueColor.value < 256) {var blue = blueColor.value} else {var blue = 255}
+if (greenColor.value < 256) {var green = greenColor.value} else {var green = 255}
+//if (alphaColor.value < 256) {var alpha = alphaColor.value} else {var alpha = 255}
+//color = `rgba(${red},${green},${blue},${alpha},0)`
+color = `rgba(${red},${green},${blue},255,0)`
+color = rgba2hex(color);
+}
 
 function paint() {
-brush.fillStyle = "#FF0000";
+brush.fillStyle = color;
 brush.beginPath();
-brush.arc(mouseX, mouseY, (paintSize*5), 0, 2 * Math.PI);
-brush.stroke();
+brush.arc(mouseX, mouseY, (paintsize*5), 0, 2 * Math.PI);
+brush.fill();
 }
 
 
