@@ -1,8 +1,8 @@
 
 //Just some fun stuff for when the page loads!
 
-var x = random(1,5)
-switch(x){
+var a = random(1,5)
+switch(a){
 	case 1:
 	console.log('Hi there!'); break;
 	case 2:
@@ -39,6 +39,13 @@ var rgba = color.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
 var hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2])).toString(16).slice(1)}`;
 //console.log(hex);
 return hex
+}
+
+function paint() {
+brush.fillStyle = color;
+brush.beginPath();
+brush.arc(mouseX, mouseY, (paintsize*5), 0, 2 * Math.PI);
+brush.fill();
 }
 
 
@@ -118,12 +125,7 @@ color = `rgba(${red},${green},${blue},255,0)`
 color = rgba2hex(color);
 }
 
-function paint() {
-brush.fillStyle = color;
-brush.beginPath();
-brush.arc(mouseX, mouseY, (paintsize*5), 0, 2 * Math.PI);
-brush.fill();
-}
+
 
 
 
@@ -152,4 +154,32 @@ color = x
 }}
 
 
+var originalX = mouseX
+var originalY = mouseY
 
+function mouseDown() {
+originalX = mouseX
+originalY = mouseY	
+paint()
+}
+
+
+
+
+function mouseUp() {
+brush.fillStyle = color; //Sets color of brush to the chosen color
+/*
+var x,y = originalX, originalY;
+
+//for (y<mouseY; y++;) {
+brush.beginPath();
+brush.arc(x, y, paintsize*5, 0, 2 * Math.PI);
+brush.fill();
+///}
+
+
+brush.beginPath();
+brush.arc(originalX, originalY, paintsize*5, 0, 2 * Math.PI);
+brush.fill();
+*/
+}

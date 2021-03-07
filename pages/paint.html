@@ -31,6 +31,8 @@
 	<input id="alphaColor" type="text">-->
 	
 	<input  id="colorButton" type="button" value="Change Color">
+	
+	<!-- <input type="color" id="colorpicker" onchange="var color = colorpicker.value" value="#ff0000" style="width:85%;"> -->
 		
 	<br>
 	<br>
@@ -64,28 +66,19 @@
 onmousemove = function(e){mouseX = e.clientX; mouseY = e.clientY;}
 
 Canvas.onwheel = function (e) {paintSize=paintsize+1;}
-Canvas.onmousedown = function (e) {canvasclick=true;}
-Canvas.onmouseup = function (e) {canvasclick=false;}
+Canvas.onmousedown = function (e) {canvasclick=true; mouseDown();}
+Canvas.onmouseup = function (e) {canvasclick=false; mouseUp();}
 
 Canvas.onkeydown = function () {
 console.log('key pressed')
 }
 
-
-
-
-
 Canvas.onmousemove = function () {
 	console.log(canvasclick)
 		if (canvasclick == true) {
-		paint()
+		paint();
 	}
 }
-
-
-
-
-
 </script>
 
 
