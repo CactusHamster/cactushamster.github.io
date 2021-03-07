@@ -14,11 +14,7 @@ switch(x){
 	case 5:
 	console.log('hehe'); break;
 }
-function chaos (amount) {
-for (i=0; i < amount; i++) {
-drawLine(random(0,1000),random(0,1000),random(0,1000),random(0,1000))
-}
-}
+
 
 //Page update
 
@@ -41,7 +37,7 @@ function rgba2hex (colorString) {
 var color = colorString;   //'rgba(249,6,6,1,0)';
 var rgba = color.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
 var hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2])).toString(16).slice(1)}`;
-console.log(hex);
+//console.log(hex);
 return hex
 }
 
@@ -75,7 +71,8 @@ function drawCircle(beginx, beginy, radius) {
 brush.fillStyle = color;
 brush.beginPath();
 brush.arc(beginx, beginy, radius, 0, 2 * Math.PI);
-brush.stroke();
+//brush.stroke();
+brush.fill();
 }
 
 
@@ -102,10 +99,11 @@ function Time() {
 
 
 //Tells me what canvasclick is at
+/*
 var timeVar = setInterval(CanvasClickQuery, 10);
 function CanvasClickQuery() {
   document.getElementById("click").innerHTML = canvasclick;
-}
+}*/
 
 
 
@@ -127,6 +125,31 @@ brush.arc(mouseX, mouseY, (paintsize*5), 0, 2 * Math.PI);
 brush.fill();
 }
 
+
+
+function randomColor() {
+	var red = random(1,255)
+	var green = random(1,255)
+	var blue = random(1,255)
+	color = `rgba(${red},${green},${blue},255,0)` 
+	color = rgba2hex(color);
+	return color;
+}
+
+
+
+
+
+function chaos (amount) {
+for (i=0; i < amount; i++) {
+x = color;
+randomColor();
+color = randomColor();
+drawRectangle(random(1,1000),random(1,500),random(1,1000),random(1,500))
+drawCircle(random(1,1000), random(1,500), random(1,300))
+drawLine(random(1,1000),random(1,500),random(1,1000),random(1,500))
+color = x
+}}
 
 
 
