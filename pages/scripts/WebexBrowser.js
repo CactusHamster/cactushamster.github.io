@@ -3,7 +3,7 @@ var x = 0
 var New_Pineapple_Spaces = 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNjI1ZGQ1MDAtNzQ1OS0xMWViLWJkZTMtYTU3MGVlOTk0YTll';
 var RoomID = ''
 var commandType = ''
-
+commandType2 = ''
 
 function initWebex(token) {
 webex = window.Webex.init({
@@ -77,10 +77,29 @@ tokenIsSet();
 
 
 
+function CommandListClick(element) {
+commandType2 = element.innerHTML
+for (var i=0;i<10;i++) {
+	for (const i of document.getElementsByClassName("commandList")) {i.style="color:white"}}; 
+	element.style="color:#74ad76;"
+}
 
 
-
-
+function prepareCommand() {
+	switch (commandType) {
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+}
 
 
 
