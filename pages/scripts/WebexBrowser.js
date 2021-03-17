@@ -1,8 +1,7 @@
 var webex
 var x = 0
 var New_Pineapple_Spaces = 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNjI1ZGQ1MDAtNzQ1OS0xMWViLWJkZTMtYTU3MGVlOTk0YTll';
-var RoomID
-var x = 0
+var RoomID = ''
 
 
 
@@ -104,6 +103,8 @@ MakeRoomList();
 }
 
 function deleteRoomList() {
+RoomID = ''
+for (var i=0;i<10;i++) {for (const i of document.getElementsByClassName("roomSelectList")) {i.style="color:white"}};
 /*var z = document.getElementsByClassName("roomSelectScript"); for (var i = 0; i < z.length; i++) { z[i].remove();}; var z = document.getElementsByClassName("roomSelectList"); for (var i = 0; i < z.length; i++) {z[i].remove();}*/
 for (var i=0;i<10;i++) {
 for (const i of document.getElementsByClassName("roomSelectList")) {console.log('hi'); i.remove();
@@ -130,7 +131,10 @@ piece.id = 'roomSelectList' + x;
 document.getElementById("RoomSelectDiv").appendChild(piece);
 //Add a generated script for each room choice
 var script = document.createElement("SCRIPT");
-script.innerHTML = 'roomSelectList'+ x +'.onclick = function (e) {console.log("' + roomid + '"); RoomID ="' + roomid + '";}'; 
+script.innerHTML = 'roomSelectList'+ x +'.onclick = function (e) {console.log("' + roomid + '"); RoomID ="' + roomid + '";   for (var i=0;i<10;i++) {for (const i of document.getElementsByClassName("roomSelectList")) {i.style="color:white"}};  document.getElementById(\"roomSelectList'+ x + '\").style="color:#74ad76;" }'; 
+
+
+
 script.className = 'roomSelectScript';
 var a = "roomSelectList" + x
 document.getElementById(a).appendChild(script);
@@ -139,14 +143,14 @@ console.log('Done listing rooms.')
     }) //End of .then
 }
 
-
+/*
 var update = setInterval(Update, 5000);
 function Update() {
 
 
 
 }
-
+*/
 
 function say(message, roomid = New_Pineapple_Spaces) {
 
@@ -155,9 +159,6 @@ function say(message, roomid = New_Pineapple_Spaces) {
 
 
 function newTeam() {
-	
-	
-	
 webex.rooms
   .list({
     max: 10
