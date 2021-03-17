@@ -32,6 +32,7 @@ h2 {
 a {
   color: #6aa86f;
   text-decoration: none;
+  /*font-family: courier;*/
 }
 
 
@@ -110,4 +111,9 @@ text-align: center;
 	border: none;
 }
 
-
+.titleKao {
+	font-family: courier;
+color: #6aa86f;
+font-size: 460%;
+text-align: center;	
+}

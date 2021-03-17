@@ -3,11 +3,11 @@ function random(min, max) {
 }
 
 
-var prebuilt = ['ヾ(•ω•`)o','o((>ω< ))o','☜(ﾟヮﾟ☜)']
+var prebuilt = ["(o_o)", "(0_o)", "(^_^)", "(-_-)", "(;-;)", "(\\_/)", "(*0*)", "('_`)", "(~_~)"]
+document.getElementById("titleKao").innerHTML = prebuilt[random(1,9)-1]
 
-document.getElementById("titleKao").innerHTML = prebuilt[random(1,2)-1]
-
-
+prebuilt = ["Hai!","ヾ(•ω•`)o","ヾ(≧▽≦*)o","ψ(｀∇´)ψ","(*^▽^*)"]
+console.log(prebuilt)
 
 
 
@@ -20,7 +20,6 @@ if (enhance == true) {
 	enhance = true;
 	document.getElementById("enhancer").style = 'background-color: indianred; color:white; padding: 12px; font-size: 18px; border-radius: 10px; border: none;';	
 }	
-console.log(enhance)
 }
 //enhancer.onclick = function (e) {EnhanceRandomize()}
 
