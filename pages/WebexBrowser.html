@@ -19,27 +19,27 @@
 
 
 <div class="dropdown inline">
-  <button id="roomSelect" class="dropbtn" style="width:400px">RoomID</button>
+  <button id="roomSelect" class="dropbtn" style="width:400px">Room ID</button>
   <div id="RoomSelectDiv" class="dropdown-content">
-    <a id='1' class="roomSelectList">Link 1</a>
-    <a id='2' class="roomSelectList">Link 2</a>
-    <a id='3' class="roomSelectList">Link 3</a>
+    <a id='1' class="roomSelectList">hehe</a>
+    <a id='2' class="roomSelectList">carrot</a>
+    <a id='3' class="roomSelectList">hehe</a>
   </div>
 </div>
 
 <div class="dropdown inline">
-  <button id="commandSelect" class="dropbtn">Command</button>
+  <button id="commandSelect" class="dropbtn">Command Type</button>
   <div class="dropdown-content">
-    <a href="#">Room</a>
-    <a href="#">Message</a>
-    <a href="#">Membership</a>
-	<a href="#">Team</a>
-	<a href="#">Person</a>
+    <a class="commandTypeLink" onclick="commandType='room'; commandTypeAnimation(event.target)">Room</a>
+    <a class="commandTypeLink" onclick="commandType='message'; commandTypeAnimation(event.target)">Message</a>
+    <a class="commandTypeLink" onclick="commandType='membership'; commandTypeAnimation(event.target)">Membership</a>
+	<a class="commandTypeLink" onclick="commandType='team'; commandTypeAnimation(event.target)">Team</a>
+	<a class="commandTypeLink" onclick="commandType='person';commandTypeAnimation(event.target)">Person</a>
   </div>
 </div>
 
 <div class="dropdown inline">
-  <button id="roomSelect" class="dropbtn">RoomID</button>
+  <button id="roomSelect" class="dropbtn">Command</button>
   <div class="dropdown-content">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>
