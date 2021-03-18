@@ -14,7 +14,7 @@
 <input id="tokenBox" type="text" style="width:800px"></input> 
 <input type="button" id="authChange" value="Change AuthToken" class="AuthButton"></input>
 <br></br>
-<input type="button" id="PineappleAuth" value="Use Pineapple's AuthToken"></input>
+<input type="button" id="PineappleAuth" class="AuthButton" value="Use Pineapple's AuthToken"></input>
 <p id='change'>-------------------------</p>
 
 
@@ -45,8 +45,14 @@
 	<a class="commandList" onclick="CommandListClick(event.target)">List</a>
     <a class="commandList" onclick="CommandListClick(event.target)">Delete</a>
     <a class="commandList" onclick="CommandListClick(event.target)">Edit</a>
+	<a class="commandList" onclick="CommandListClick(event.target)">Details</a>
   </div>
 </div>
+
+<div class="dropdown inline">
+<button id="run" class="dropbtn" onclick="run()">Run!</button>
+</div>
+
 <br><br><br><br>
 
 
@@ -60,6 +66,15 @@
 <input id="option4" type="text" placeholder="" title="" class="inputBox"></input>
 
 <input id="option5" type="text" placeholder="" title="" class="inputBox"></input>
+
+<br><br><br>
+
+<p>Recieved Messages:</p>
+<textarea style="width:100%; height:100px" id="messages"></textarea>
+
+<p>Output:</p>
+<textarea style="width:100%; height:100px" id="output"></textarea>
+
 
 
 </body>
