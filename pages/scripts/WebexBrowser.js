@@ -621,7 +621,8 @@ function run() {
 					.then((memberships) => {
 					for (const member of memberships.items) {
 						let displayName = (member.personDisplayName) ? member.personDisplayName : member.personEmail;
-						output.value= output.value+'\n'+displayName
+						let id = member.id;
+						output.value= output.value+'\n'+displayName+'\n'+id+'\n';
 					}
 					console.log('Oldest')
 				console.log('Done listing names.')
