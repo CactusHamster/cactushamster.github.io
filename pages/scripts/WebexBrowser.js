@@ -512,7 +512,7 @@ function run() {
 				tokenIsSet();}
 				break;
 				
-				case 'Edit':
+				case 'Edit': //WARNING: THIS IS BROKEN AND NEEDS REDO
 				/*console.log('Room Edit')
 				var a = roomName;
 				webex.rooms.update({title: option1.value}) .then((room) => {
@@ -524,6 +524,23 @@ function run() {
 				.then(function(r) {room = r; room.title = 'Update Room Example (Updated Title)'; return webex.rooms.update(room);})
 				.then(function() {return webex.rooms.get(room.id);})
 				output.value = 'Renamed' + a + 'to' + room.title;
+				break;
+				
+				case 'Details':
+				console.log('Room Details')
+				webex.rooms.get(RoomID) .then((room) => {
+				output.value = room.title+'\n'+
+				room.id+'\n'+
+				room.type+'\n'+
+				'Is Moderated: '+room.isLocked+'\n'+
+				'Creator: '+room.creatorId+'\n'+
+				'Created: '+room.created+'\n'+
+				"Owner: "+room.ownerId+'\n'+
+				"Classification: "+room.classificationId+'\n'+
+				'Team ID: '+room.teamId+'\n'+
+				'Last Activity: '+room.lastActivity+'\n'
+				//output.value = room
+				});
 				break;
 			}
 		break;
@@ -551,6 +568,9 @@ function run() {
 				
 				case 'List':
 				console.log('Message List');
+				webex.messages.list({ roomId: RoomID,
+				mentionedPeople: 'me',
+				max: option1.value})
 				break;
 				
 				case 'Delete':
