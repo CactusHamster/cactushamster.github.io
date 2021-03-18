@@ -624,8 +624,6 @@ function run() {
 						let id = member.id;
 						output.value= output.value+'\n'+displayName+'\n'+id+'\n';
 					}
-					console.log('Oldest')
-				console.log('Done listing names.')
 				})
 				break;
 				
@@ -815,11 +813,17 @@ webex.messages.listen()
 	});
 //webex.messages.on('deleted', (event) => console.log('message deleted')) //Message Deleted event
   })
-  .catch((e) => console.error(`Unable to register for message events: ${e}`));
+  .catch((e) => {console.error(`Unable to register for message events: ${e}`);
+  output.value='Cannot get messages at the moment.';
+  });
+
 // Some app logic...
 // WHen it is time to cleanup
+
+
+function stopEvents () {
 webex.messages.stopListening();
 webex.messages.off('created');
 webex.messages.off('deleted');
-
+}
 
