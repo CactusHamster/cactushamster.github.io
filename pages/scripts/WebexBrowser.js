@@ -615,7 +615,17 @@ function run() {
 				break;
 				
 				case 'List':
+				output.value='';
 				console.log('Membership List');
+				webex.memberships.list({roomId: RoomID, max: option1.value})
+					.then((memberships) => {
+					for (const member of memberships.items) {
+						let displayName = (member.personDisplayName) ? member.personDisplayName : member.personEmail;
+						output.value= output.value+'\n'+displayName
+					}
+					console.log('Oldest')
+				console.log('Done listing names.')
+				})
 				break;
 				
 				case 'Delete':
