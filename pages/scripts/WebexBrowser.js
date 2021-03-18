@@ -216,18 +216,58 @@ function prepareCommand() {
 			switch (commandType2) {
 				case 'Create':
 				console.log('Membership Create')
+				document.getElementById("option1").placeholder = 'Email';
+				document.getElementById("option1").title = 'The email of people to add';
+				document.getElementById("option2").placeholder = 'Mod Permissions True/False';
+				document.getElementById("option2").title = 'Whether or not to make the added persn a mod';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 				
 				case 'List':
 				console.log('Membership List');
+				document.getElementById("option1").placeholder = 'Max Amount';
+				document.getElementById("option1").title = 'Max number of space members to list';
+				document.getElementById("option2").placeholder = '';
+				document.getElementById("option2").title = '';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 				
 				case 'Delete':
 				console.log('Membership Delete');
+				document.getElementById("option1").placeholder = 'Membership ID';
+				document.getElementById("option1").title = 'ID of membership to delete';
+				document.getElementById("option2").placeholder = '';
+				document.getElementById("option2").title = '';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 				
 				case 'Edit':
 				console.log('Membership Edit')
+				document.getElementById("option1").placeholder = 'Membership ID';
+				document.getElementById("option1").title = 'ID of the membership to edit';
+				document.getElementById("option2").placeholder = 'Mod Permissions True/False';
+				document.getElementById("option2").title = 'Whether or not to give target membership mod permissions';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 			}
 		break;
@@ -236,18 +276,58 @@ function prepareCommand() {
 			switch (commandType2) {
 				case 'Create':
 				console.log('Team Create')
+				document.getElementById("option1").placeholder = 'Team Name';
+				document.getElementById("option1").title = 'Name to give the nex team';
+				document.getElementById("option2").placeholder = '';
+				document.getElementById("option2").title = '';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 				
 				case 'List':
 				console.log('Team List');
+				document.getElementById("option1").placeholder = 'Max Amount';
+				document.getElementById("option1").title = 'Max number of teams to list';
+				document.getElementById("option2").placeholder = '';
+				document.getElementById("option2").title = '';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 				
 				case 'Delete':
 				console.log('Team Delete');
+				document.getElementById("option1").placeholder = 'Team ID';
+				document.getElementById("option1").title = 'ID of the team to delete';
+				document.getElementById("option2").placeholder = '';
+				document.getElementById("option2").title = '';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 				
 				case 'Edit':
 				console.log('Team Edit')
+				document.getElementById("option1").placeholder = 'Team Name';
+				document.getElementById("option1").title = 'New name of team';
+				document.getElementById("option2").placeholder = '';
+				document.getElementById("option2").title = '';
+				document.getElementById("option3").placeholder = '';
+				document.getElementById("option3").title = '';
+				document.getElementById("option4").placeholder = '';
+				document.getElementById("option4").title = '';	
+				document.getElementById("option5").placeholder = '';
+				document.getElementById("option5").title = '';
 				break;
 			}
 		break;
