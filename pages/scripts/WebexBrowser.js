@@ -568,13 +568,28 @@ function run() {
 				
 				case 'List':
 				console.log('Message List');
-				webex.messages.list({ roomId: RoomID,
-				mentionedPeople: 'me',
-				max: option1.value})
+				output.value = '';
+				var locked = false;
+				webex.rooms.get(RoomID) .then((room) => {locked = room.type
+				console.log(locked);
+				if (locked == 'direct') {
+				webex.messages.list({roomId: RoomID, max: option1.value})
+				.then((messages) => {for (const message of messages.items) {
+				output.value = output.value+'\n\n'+'['+message.personEmail+']: '+message.text;
+				console.log(message.text);
+				}})
+				} else {
+				webex.messages.list({roomId: RoomID, mentionedPeople: 'me', max: option1.value})
+				.then((messages) => {for (const message of messages.items) {
+				console.log(message.text)
+				output.value = output.value+'\n\n'+'['+message.personEmail+']: '+message.text;}})}
+				;})
 				break;
 				
 				case 'Delete':
 				console.log('Message Delete');
+				webex.messages.remove(option1.value)
+				output.value = 'Deleted message: '+option1.value;
 				break;
 				
 				case 'Edit':
@@ -591,6 +606,12 @@ function run() {
 			switch (commandType2) {
 				case 'Create':
 				console.log('Membership Create')
+				webex.memberships.create({
+				roomId: RoomID,
+				personEmail: option1.value,
+				isModerator: option2.value.toLowerCase(),
+				});
+				output.value = 'Added '+option1.value+'to '+roomName+' with mod status: '+option2.value
 				break;
 				
 				case 'List':
