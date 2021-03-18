@@ -629,6 +629,8 @@ function run() {
 				
 				case 'Delete':
 				console.log('Membership Delete');
+				webex.memberships.remove(option1.value)
+				output.value = 'Removed: '+option1.value;
 				break;
 				
 				case 'Edit':
