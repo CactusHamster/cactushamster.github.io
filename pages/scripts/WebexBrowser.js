@@ -188,8 +188,8 @@ function prepareCommand() {
 				console.log('Message List');
 				document.getElementById("option1").placeholder = 'Max Amount';
 				document.getElementById("option1").title = 'Maximum number of readable messages to list';
-				document.getElementById("option2").placeholder = '';
-				document.getElementById("option2").title = '';
+				document.getElementById("option2").placeholder = '@mention me';
+				document.getElementById("option2").title = 'Only lists messages with your @mention. Must be true for bots.';
 				document.getElementById("option3").placeholder = '';
 				document.getElementById("option3").title = '';
 				document.getElementById("option4").placeholder = '';
@@ -569,19 +569,20 @@ function run() {
 				case 'List':
 				console.log('Message List');
 				output.value = '';
-				var locked = false;
+				//var locked = false;
 				webex.rooms.get(RoomID) .then((room) => {locked = room.type
-				console.log(locked);
-				if (locked == 'direct') {
+				//console.log(locked);
+				//if (locked == 'direct') {
+				if (option2.value = 'false') {
 				webex.messages.list({roomId: RoomID, max: option1.value})
 				.then((messages) => {for (const message of messages.items) {
 				output.value = output.value+'\n\n'+'['+message.personEmail+']: '+message.text;
-				console.log(message.text);
+				//console.log(message.text);
 				}})
 				} else {
 				webex.messages.list({roomId: RoomID, mentionedPeople: 'me', max: option1.value})
 				.then((messages) => {for (const message of messages.items) {
-				console.log(message.text)
+				//console.log(message.text)
 				output.value = output.value+'\n\n'+'['+message.personEmail+']: '+message.text;}})}
 				;})
 				break;
