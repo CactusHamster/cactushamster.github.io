@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- ATTENTION: THIS IS SAVOHN AND ANGEL'S BOT -->
+<head>
+<link rel="icon" href="images/favicon-96x96.png" type="image/x-icon" width="256" height="256">
+<meta name="description" content="Angel's Bot Control Panel">
+<link rel="stylesheet" href="css/WebexBrowser.css" />
+
+</head>
+
+
+<body onunload="stopEvents()">
+<br></br>
+
+<input id="tokenBox" type="text" style="width:800px"></input> 
+<input type="button" id="authChange" value="Change AuthToken" class="AuthButton"></input>
+<br>
+<a rel="noreferrer noopener" style="color: #6aa86f; text-decoration: none; border:solid #6aa86f 1px;" target="_blank" href="https://developer.webex.com/docs/api/getting-started">Click here and scroll down for your own AuthToken, or Access Token.</a>
+<br></br>
+<input type="button" id="PineappleAuth" class="AuthButton" value="Use Angel's Bot's AuthToken"></input>
+<p id='change'>-------------------------</p>
+
+
+<div class="dropdown inline">
+  <button id="roomSelect" class="dropbtn" style="width:400px">Room ID</button>
+  <div id="RoomSelectDiv" class="dropdown-content">
+    <a id='1' class="roomSelectList">hehe</a>
+    <a id='2' class="roomSelectList">carrot</a>
+    <a id='3' class="roomSelectList">hehe</a>
+  </div>
+</div>
+
+<div class="dropdown inline">
+  <button id="commandSelect" class="dropbtn">Command Type</button>
+  <div class="dropdown-content">
+    <a class="commandTypeLink" onclick="commandType='room'; commandTypeAnimation(event.target)">Room</a>
+    <a class="commandTypeLink" onclick="commandType='message'; commandTypeAnimation(event.target)">Message</a>
+    <a class="commandTypeLink" onclick="commandType='membership'; commandTypeAnimation(event.target)">Membership</a>
+	<a class="commandTypeLink" onclick="commandType='team'; commandTypeAnimation(event.target)">Team</a>
+	<a class="commandTypeLink" onclick="commandType='person';commandTypeAnimation(event.target)">Person</a>
+  </div>
+</div>
+
+<div class="dropdown inline">
+  <button id="roomSelect" class="dropbtn">Command</button>
+  <div class="dropdown-content">
+    <a class="commandList" onclick="CommandListClick(event.target)">Create</a>
+	<a class="commandList" onclick="CommandListClick(event.target)">List</a>
+    <a class="commandList" onclick="CommandListClick(event.target)">Delete</a>
+    <a class="commandList" onclick="CommandListClick(event.target)">Edit</a>
+	<a class="commandList" onclick="CommandListClick(event.target)">Details</a>
+  </div>
+</div>
+
+<div class="dropdown inline">
+<button id="run" class="dropbtn" onclick="run()">Run!</button>
+</div>
+
+<br><br><br><br>
+
+
+
+<input id="option1" type="text" placeholder="" title="" class="inputBox"></input>
+
+<input id="option2" type="text" placeholder="" title="" class="inputBox"></input>
+
+<input id="option3" type="text" placeholder="" title="" class="inputBox"></input>
+
+<input id="option4" type="text" placeholder="" title="" class="inputBox"></input>
+
+<input id="option5" type="text" placeholder="" title="" class="inputBox"></input>
+
+<br><br><br>
+
+<p>Recieved Messages:</p>
+<textarea style="width:100%; height:100px" id="messages"></textarea>
+
+<p>Command Output:</p>
+<textarea style="width:100%; height:100px" id="output"></textarea>
+
+
+
+</body>
+
+
+
+
+<script crossorigin src="https://unpkg.com/webex@^1/umd/webex.min.js"></script> <!-- Webex SDK -->
+<script defer src='scripts/WebexBrowserAngel.js'></script> <!-- My script for buttons and stuff -->
+<!-- <script>event.preventDefault();</script> -->
+
+
+
+<!-- Other Webex SDK Links -->
+<!--
+<script crossorigin src="https://unpkg.com/webex/umd/webex.min.js"></script>
+<script crossorigin src="https://cdn.jsdelivr.net/npm/webex/umd/webex.min.js"></script>
+<script crossorigin src="https://gitcdn.xyz/repo/webex/webex-js-sdk/master/packages/node_modules/webex/umd/webex.min.js"></script>
+-->
