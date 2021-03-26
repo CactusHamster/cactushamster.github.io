@@ -14,7 +14,8 @@ webex = window.Webex.init({
   credentials: {
     access_token: token}
 });
-
+stopEvents();
+eventstart();
 }
 
 //Use Pineapple by default on load.
