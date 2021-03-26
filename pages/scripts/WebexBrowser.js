@@ -4,7 +4,10 @@ var New_Pineapple_Spaces = 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00v
 var RoomID = '';
 var roomName = '';
 var commandType = '';
+var passwordAuth = '';
 commandType2 = '';
+
+document.location.origin = 'HAMSTER_HEHEHEHE'
 
 function initWebex(token) {
 webex = window.Webex.init({
@@ -573,7 +576,7 @@ function run() {
 				webex.rooms.get(RoomID) .then((room) => {locked = room.type
 				//console.log(locked);
 				//if (locked == 'direct') {
-				if (option2.value = 'false') {
+				if (option2.value == 'false') {
 				webex.messages.list({roomId: RoomID, max: option1.value})
 				.then((messages) => {for (const message of messages.items) {
 				output.value = output.value+'\n\n'+'['+message.personEmail+']: '+message.text;
@@ -780,7 +783,7 @@ webex.rooms.off('updated');
 */
 
 function messagelog(text) {messages.value = messages.value + text+ '\n'}
-
+function eventStart () {
 webex.messages.listen()
   .then(() => {
     console.log('listening for messages');
@@ -822,8 +825,7 @@ webex.messages.listen()
 
 // Some app logic...
 // WHen it is time to cleanup
-
-
+}
 function stopEvents () {
 webex.messages.stopListening();
 webex.messages.off('created');
