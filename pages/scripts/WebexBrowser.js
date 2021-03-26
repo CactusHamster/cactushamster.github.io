@@ -1,6 +1,7 @@
 var webex;
 var x = 0;
 var New_Pineapple_Spaces = 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNjI1ZGQ1MDAtNzQ1OS0xMWViLWJkZTMtYTU3MGVlOTk0YTll';
+var HenryTeam = 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vODE2OGM5YTAtOGNmMC0xMWViLWEwZTEtM2YxYWZiNjk3OTlh'
 var RoomID = '';
 var roomName = '';
 var commandType = '';
@@ -517,17 +518,16 @@ function run() {
 				break;
 				
 				case 'Edit': //WARNING: THIS IS BROKEN AND NEEDS REDO
-				/*console.log('Room Edit')
-				var a = roomName;
-				webex.rooms.update({title: option1.value}) .then((room) => {
-					output.value = 'Renamed' + a + 'to' + room.title;
-				});*/
+				
 				var a = roomName;
 				var room;
-				webex.rooms.update({title: roomName})
-				.then(function(r) {room = r; room.title = 'Update Room Example (Updated Title)'; return webex.rooms.update(room);})
-				.then(function() {return webex.rooms.get(room.id);})
-				output.value = 'Renamed' + a + 'to' + room.title;
+				
+				webex.rooms.update({id: RoomID, title: option1.value}).then ((room) => {tokenIsSet();
+				output.value = 'Renamed "' + a + '" to "' + room.title + '"';
+				})
+				
+				
+				
 				break;
 				
 				case 'Details':
