@@ -47,7 +47,8 @@ function output(text) {
 function convert() {
 //console.log(fileText);
 //Cut file up by semicolons:
-var sliced = fileText.split("\n");
+var sliced = fileText.replace(';', '\n').split("\n");
+
 
 //Reset output box
 document.getElementById("output").value = '';
@@ -62,7 +63,7 @@ var line = lines.trim()
 if (line.slice(0,2) == '//') {line = ''}
 
 //Get rid of semicolons:
-line = line.replace(';', '');
+//line = line.replace(';', '');
 
 //SET:
 if (line.includes('var')) {
@@ -190,38 +191,40 @@ if (line.includes('draw') & !line.includes('drawflush')) {
 		line = line.replace(',',' ')
 		break;
 		
-		
 		case 'color':
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		line = 'draw color ' + line.slice(line.indexOf('(')+1, line.indexOf(')'));
 		line = line + ' 0 0'
 		break;
 		
-		
 		case 'stroke':
 		line = 'draw stroke ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0 0 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
 		
-		
 		case 'line':
-		line = 'draw line ' + args + ' 0 0'
+		line = 'draw line ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
 		
 		case 'rectangle':
-		line = 'draw rect ' + args + ' 0 0'
+		line = 'draw rect ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
 		
 		case 'lineRect':
-		line = 'draw lineRect ' + args + ' 0 0'
+		line = 'draw lineRect ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0'
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		
+		case 'poly':
+		line = 'draw poly ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
 		
 		
 	} //End of swootch
-	
+
 } //End of Draw()
 
 //Drawflush:
@@ -231,8 +234,8 @@ if (line.includes('drawflush(')) {
 	//Add a space between the function and the value:
 	line = line.replace('(',' ')
 	//Get rid of quotes:
-	line = line.replace('"','')
-	line = line.replace("'",'')
+	while (line.includes('"')) {line = line.replace('"', '');}
+	while (line.includes("'")) {line = line.replace("'", '');}
 }
 
 
@@ -240,6 +243,8 @@ if (line.includes('drawflush(')) {
 line = line.replace('  ', ' ')
 line = line.replace('  ', ' ')
 line = line.replace('  ', ' ')
+while (line.includes('  ')) {line = line.replace('  ', ' ');}
+
 //Output the finished product:
 output(line)
 
