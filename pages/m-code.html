@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+
+<html>
+
+	<head>
+		<title>Javascript2Mindustry</title>
+		<link rel="icon" href="images/favicon-96x96.png" type="image/x-icon" width="256" height="256">
+		<link rel="stylesheet" href="css/mcode.css" />
+	</head>
+
+
+	<style>
+	p {font-family:verdana
+	color:#303442}
+	
+	label {font-family: courier;
+	color:#303442; font-size:160%;}
+	
+	div {background:#4d4c49; border-width=0px;}
+	
+	
+	
+	</style>
+
+
+
+	<body style="font-family:verdana;background:#4a4841;">
+	
+		<div style="font-size:10%; background-color:#59574f;">&nbsp;</div>
+	
+		<div title="You'd better enjoy the color choice." style="font-family: 'Overpass Mono', monospace; background:-webkit-linear-gradient(top,#59574f,#4d4c49); font-size:160%">
+			<font style="color:#d1c49b;">Javascript2</font><font style="color:red;">Mindustry</font>
+		</div>
+
+		<div>&nbsp;</div>
+		
+		<div>
+			<input style="background:#4d4c49; color:#4d4c49;" id="file" value="Choose a file!" type="file" accept=".js; *.proc" class="file-picker" title="Insert data file here." />
+		</div>
+		
+		<!-- <div class="line">
+			<br>
+		</div> -->
+		
+		<div>			
+			<img src=''>
+		</div>
+		
+		<div>
+			<input type="button" value="Convert!" id="sliceButton" onclick="convert()" class="converter"></input>
+		</div>
+		
+		<div class="div2">
+			<p>&nbsp;</p>
+			<!--<input type="textarea" id="output"></input>-->
+			<textarea class="output" id="output"></textarea>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+		
+		<p id="pOutput"></p>
+		
+	</body>
+
+
+
+</html>
+
+
+
+
+
+<script defer src="scripts/mcode.js"></script>
+
+
+
+<script defer>
+	file.addEventListener('change', (event) => {
+	});
+</script>
+
+
+
+
