@@ -116,6 +116,7 @@ if (!line.includes('var') & line.includes('=')) {
 	//Rearrange the line:
 	var bits = line.split(' ');
 	line = 'op ';
+	line = line+bits[4]+' ';
 	line = line+bits[3]+' ';
 	line = line+bits[0]+' ';
 	line = line+bits[2]+' ';
@@ -130,23 +131,95 @@ draw clear 0 0 0 0 0 0
 draw rect 0 0 0 0 0 0
 draw line 0 0 0 0 0 0
 draw color 0 0 0 255 0 0
+draw linePoly 0 0 0 0 0 0
+draw rect 0 0 0 0 0 0
+draw lineRect 0 0 0 0 0 0
+draw poly 0 0 0 255 0 0
 drawflush display1
-*/
 
-if (line.includes('draw(')) {
+*/
+if (line.includes('draw') & !line.includes('drawflush')) {
 	var drawType = '';
 	
 	//Clear:
-	if (line.includes ('clear')) {drawType = 'clear';}
-	//Rectangle:
-	else if (line.includes ('rect')) {drawType = 'rect';}
+	if (line.includes('clear')) {drawType = 'clear'}
 	//Color:
-	else if (line.includes ('color')) {drawType = 'color';}
+	else if (line.includes('color')) {drawType = 'color';}
 	//Stroke width
-	else if (line.includes ('stroke')) {drawType = 'stroke';}
+	else if (line.includes('.stroke')) {drawType = 'stroke';}
 	//Line
-	else if (line.includes ('line')) {drawType = 'line';}
+	else if (line.includes('.line')) {drawType = 'line';}
+	//Rectangle:
+	else if (line.includes('.rect')) {drawType = 'rectangle';}
+	//LineRect
+	else if (line.includes('.lineRect')) {drawType = 'lineRect';}
+	//Polygon:
+	else if (line.includes('.poly')) {drawType = 'poly';}
+	//LinePoly:
+	else if (line.includes('.linePoly')) {drawType = 'linePoly';}
+	//Triangle:
+	else if (line.includes('.linePoly')) {drawType = 'triangle';}
+	//Image:
+	else if (line.includes('.linePoly')) {drawType = 'image';}
+	
+	//Filter function arguments:
+	var args = line.slice(line.indexOf('(')+1, line.indexOf(')'));
+	var argsArray = line.slice(line.indexOf('(')+1, line.indexOf(')')).split(",");
+	
+	//Draw based on the type of line.
+	switch (drawType) {
+		
+		case 'clear':
+		line = line.replace(',',' ')
+		line = 'draw clear ' + line.slice(line.indexOf('(')+1, line.indexOf(')'));
+		line = line.replace(',',' ')
+		line = line.replace(',',' ')
+		line = line.replace(',',' ')
+		break;
+		
+		
+		case 'color':
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		line = 'draw color ' + line.slice(line.indexOf('(')+1, line.indexOf(')'));
+		line = line + ' 0 0'
+		break;
+		
+		
+		case 'stroke':
+		line = 'draw stroke ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0 0 0 0'
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		
+		
+		case 'line':
+		line = 'draw line ' + args + ' 0 0'
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		
+		case 'rectangle':
+		line = 'draw rect ' + args + ' 0 0'
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		
+		case 'lineRect':
+		line = 'draw lineRect ' + args + ' 0 0'
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		
+		
+	} //End of swootch
+	
+} //End of Draw()
 
+//Drawflush:
+if (line.includes('drawflush(')) {
+	//Get rid of ) at the end of function:
+	line = line.replace(')','')
+	//Add a space between the function and the value:
+	line = line.replace('(',' ')
+	//Get rid of quotes:
+	line = line.replace('"','')
+	line = line.replace("'",'')
 }
 
 
