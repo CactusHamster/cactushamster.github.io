@@ -73,54 +73,66 @@ if (line.includes('var')) {
 //Operators
 if (!line.includes('var') & line.includes('=')) {
 	//FINISH: Add in the rest of the operators
-	line = line.replace('+', ' add ');
-	line = line.replace('-', ' sub ');
-	line = line.replace('*', ' mul ');
-	line = line.replace('/', ' div ');
-//	line = line.replace('//', ' idiv ');
-	line = line.replace('%', ' mod ');
-	line = line.replace('^', ' pow ');
-	line = line.replace('==', ' equal ');
-	line = line.replace('!=', ' notEqual ');
-	line = line.replace('&&', ' land ');
-	line = line.replace('<', ' lessThan ');
-	line = line.replace('<=', ' lessThanEq ');
-	line = line.replace('>', ' greaterThan ');
-	line = line.replace('>=', ' greaterThanEq ');
-	line = line.replace('===', ' strictEqual ');
-	line = line.replace('<<', ' shl ');
-	line = line.replace('>>', ' shr ');
-	line = line.replace('||', ' or ');
-	line = line.replace('&', ' and ');
-	line = line.replace('|', ' xor ');
-	//	line = line.replace('flip', ' not ');
-	line = line.replace('max', ' max ');
-	line = line.replace('min', ' min ');
-	line = line.replace('angle', ' angle ');
-	line = line.replace('Math.abs(', ' abs ');
-	line = line.replace('Math.log(', ' log ');
-//	line = line.replace('vectorLength(', ' len ');
-	line = line.replace('noise(', ' noise ');
-	line = line.replace('Math.LN10(', ' log10 ');
-	line = line.replace('Math.sin(', ' sin ');
-	line = line.replace('Math.cos(', ' cos ');
-	line = line.replace('Math.tan(', ' tan ');
-	line = line.replace('Math.floor(', ' floor ');
-	line = line.replace('Math.ceil', ' ceil ');
-	line = line.replace('Math.sqrt(', ' sqrt ');
-	line = line.replace('Math.random(', ' rand 1');
+	line = line.replace('+', ' ?add? ');
+	line = line.replace('-', ' ?sub? ');
+	line = line.replace('*', ' ?mul? ');
+	line = line.replace('/', ' ?div? ');
+//	line = line.replace('//', ' ?idiv? ');
+	line = line.replace('%', ' ?mod? ');
+	line = line.replace('^', ' ?pow? ');
+	line = line.replace('==', ' ?equal? ');
+	line = line.replace('!=', ' ?notEqual? ');
+	line = line.replace('&&', ' ?land? ');
+	line = line.replace('<', ' ?lessThan? ');
+	line = line.replace('<=', ' ?lessThanEq? ');
+	line = line.replace('>', ' ?greaterThan? ');
+	line = line.replace('>=', ' ?greaterThanEq? ');
+	line = line.replace('===', ' ?strictEqual? ');
+	line = line.replace('<<', ' ?shl? ');
+	line = line.replace('>>', ' ?shr? ');
+	line = line.replace('||', ' ?or? ');
+	line = line.replace('&', ' ?and? ');
+	line = line.replace('|', ' ?xor? ');
+	//	line = line.replace('flip', ' ?not ');
+	line = line.replace('max', ' ?max? ');
+	line = line.replace('min', ' ?min? ');
+	line = line.replace('angle', ' ?angle? ');
+	line = line.replace('Math.abs(', ' ?abs? ');
+	line = line.replace('Math.log(', ' ?log? ');
+//	line = line.replace('vectorLength(', ' ?len? ');
+	line = line.replace('noise(', ' ?noise? ');
+	line = line.replace('Math.LN10(', ' ?log10? ');
+	line = line.replace('Math.sin(', ' ?sin? ');
+	line = line.replace('Math.cos(', ' ?cos? ');
+	line = line.replace('Math.tan(', ' ?tan? ');
+	line = line.replace('Math.floor(', ' ?floor? ');
+	line = line.replace('Math.ceil', ' ?ceil? ');
+	line = line.replace('Math.sqrt(', ' ?sqrt? ');
+	line = line.replace('Math.random(', ' ?rand? 1');
 	//Get rid of the end of functions like Math.abs():
 	line = line.replace(')', '');
 	//Get rid of commas in functions:
 	line = line.replace(',', '');
+	
 	//Rearrange the line:
-	var bits = line.split(' ');
+	//var bits = line.split(' ');
+	var bits = [
+	line.slice(line.indexOf('(')+1, line.indexOf(')')),
+	line.slice(line.indexOf('(')+1, line.indexOf(')')),
+	line.slice(line.indexOf('(')+1, line.indexOf(')')),
+	
+	]
 	line = 'op ';
 	line = line+bits[4]+' ';
 	line = line+bits[3]+' ';
 	line = line+bits[0]+' ';
 	line = line+bits[2]+' ';
 	line = line+bits[bits.length-1];
+	
+	//Get rid of ? in functions:
+	line = line.replace('?', '');
+	
+	
 }
 
 
