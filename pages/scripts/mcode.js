@@ -47,7 +47,7 @@ function output(text) {
 function convert() {
 //console.log(fileText);
 //Cut file up by semicolons:
-var sliced = fileText.split(";");
+var sliced = fileText.split("\n");
 
 //Reset output box
 document.getElementById("output").value = '';
@@ -58,43 +58,102 @@ for (const lines of sliced) {
 //Remove extra whitespace:
 var line = lines.trim()
 
+//Take out comments:
+if (line.slice(0,2) == '//') {line = ''}
+
+//Get rid of semicolons:
+line = line.replace(';', '');
+
 //SET:
 if (line.includes('var')) {
 	line = line.replace('var', 'set');
 	line = line.replace('=', '');
 }
 
-//No double spaces:
-line = line.replace('  ', ' ')
-
 //Operators
-//op idiv result a b
-//op idiv result a b
-op mod result a b
-op pow result a b
-op equal result a b
-
-
-
-
 if (!line.includes('var') & line.includes('=')) {
 	//FINISH: Add in the rest of the operators
 	line = line.replace('+', ' add ');
 	line = line.replace('-', ' sub ');
 	line = line.replace('*', ' mul ');
 	line = line.replace('/', ' div ');
-	line = line.replace('//', ' idiv ');
+//	line = line.replace('//', ' idiv ');
 	line = line.replace('%', ' mod ');
 	line = line.replace('^', ' pow ');
 	line = line.replace('==', ' equal ');
+	line = line.replace('!=', ' notEqual ');
+	line = line.replace('&&', ' land ');
+	line = line.replace('<', ' lessThan ');
+	line = line.replace('<=', ' lessThanEq ');
+	line = line.replace('>', ' greaterThan ');
+	line = line.replace('>=', ' greaterThanEq ');
+	line = line.replace('===', ' strictEqual ');
+	line = line.replace('<<', ' shl ');
+	line = line.replace('>>', ' shr ');
+	line = line.replace('||', ' or ');
+	line = line.replace('&', ' and ');
+	line = line.replace('|', ' xor ');
+	//	line = line.replace('flip', ' not ');
+	line = line.replace('max', ' max ');
+	line = line.replace('min', ' min ');
+	line = line.replace('angle', ' angle ');
+	line = line.replace('Math.abs(', ' abs ');
+	line = line.replace('Math.log(', ' log ');
+//	line = line.replace('vectorLength(', ' len ');
+	line = line.replace('noise(', ' noise ');
+	line = line.replace('Math.LN10(', ' log10 ');
+	line = line.replace('Math.sin(', ' sin ');
+	line = line.replace('Math.cos(', ' cos ');
+	line = line.replace('Math.tan(', ' tan ');
+	line = line.replace('Math.floor(', ' floor ');
+	line = line.replace('Math.ceil', ' ceil ');
+	line = line.replace('Math.sqrt(', ' sqrt ');
+	line = line.replace('Math.random(', ' rand 1');
+	//Get rid of the end of functions like Math.abs():
+	line = line.replace(')', '');
+	//Get rid of commas in functions:
+	line = line.replace(',', '');
+	//Rearrange the line:
 	var bits = line.split(' ');
 	line = 'op ';
-	line = line+bits[3]+' '
-	line = line+bits[0]+' '
-	line = line+bits[2]+' '
-	line = line+bits[bits.length-1]	
+	line = line+bits[3]+' ';
+	line = line+bits[0]+' ';
+	line = line+bits[2]+' ';
+	line = line+bits[bits.length-1];
 }
 
+
+
+//Draw:
+/*
+draw clear 0 0 0 0 0 0
+draw rect 0 0 0 0 0 0
+draw line 0 0 0 0 0 0
+draw color 0 0 0 255 0 0
+drawflush display1
+*/
+
+if (line.includes('draw(')) {
+	var drawType = '';
+	
+	//Clear:
+	if (line.includes ('clear')) {drawType = 'clear';}
+	//Rectangle:
+	else if (line.includes ('rect')) {drawType = 'rect';}
+	//Color:
+	else if (line.includes ('color')) {drawType = 'color';}
+	//Stroke width
+	else if (line.includes ('stroke')) {drawType = 'stroke';}
+	//Line
+	else if (line.includes ('line')) {drawType = 'line';}
+
+}
+
+
+//No double spaces:
+line = line.replace('  ', ' ')
+line = line.replace('  ', ' ')
+line = line.replace('  ', ' ')
 //Output the finished product:
 output(line)
 
