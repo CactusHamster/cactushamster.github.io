@@ -109,30 +109,31 @@ if (!line.includes('var') & line.includes('=')) {
 	line = line.replace('Math.ceil', ' ?ceil? ');
 	line = line.replace('Math.sqrt(', ' ?sqrt? ');
 	line = line.replace('Math.random(', ' ?rand? 1');
+	
 	//Get rid of the end of functions like Math.abs():
 	line = line.replace(')', '');
 	//Get rid of commas in functions:
 	line = line.replace(',', '');
 	
+	//Add a # to the end and middle of the line:
+	line = line+'#';
+	line = line.replace('=', '#');
+	
 	//Rearrange the line:
-	//var bits = line.split(' ');
 	var bits = [
-	line.slice(line.indexOf('(')+1, line.indexOf(')')),
-	line.slice(line.indexOf('(')+1, line.indexOf(')')),
-	line.slice(line.indexOf('(')+1, line.indexOf(')')),
-	
-	]
+	line.slice(0, line.indexOf('#')), //The variable
+	line.slice(line.indexOf('#'), line.indexOf('?')), 
+	line.slice(line.indexOf('?'), line.lastIndexOf('?')), //The operator
+	line.slice(line.lastIndexOf('?'), line.lastIndexOf('#'))];
 	line = 'op ';
-	line = line+bits[4]+' ';
-	line = line+bits[3]+' ';
-	line = line+bits[0]+' ';
 	line = line+bits[2]+' ';
-	line = line+bits[bits.length-1];
+	line = line+bits[0]+' ';
+	line = line+bits[1]+' ';
+	line = line+bits[3]+' ';
 	
-	//Get rid of ? in functions:
-	line = line.replace('?', '');
-	
-	
+	//Get rid of symbols in line:
+	while (line.includes('?')) {line = line.replace('?', ' ');}
+	while (line.includes('#')) {line = line.replace('#', '');}
 }
 
 

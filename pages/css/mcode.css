@@ -116,4 +116,5 @@ text-align: center;
 .output {
 	width: 600px;
 	height: 354px;
+	border: 4px outset #635d48;
 }
