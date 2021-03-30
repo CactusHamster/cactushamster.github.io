@@ -260,13 +260,15 @@ var lineInt = line.slice(line.lastIndexOf('('), line.lastIndexOf(')')); //Line t
 var int1 = line.slice(line.indexOf('['), line.indexOf('?')); //First number in JUMP
 var int2 = line.slice(line.lastIndexOf('?'), line.lastIndexOf(']'));
 var operator = line.slice(line.indexOf('?'), line.lastIndexOf('?'));
-
+lineInt = lineInt - 1;
 
 line = 'jump ' +' '+ lineInt +' '+ operator +' '+ int1 +' '+ int2;
 
 //Get rid of leftover symbols:
 line = line.replace('(', '', "g");
 line = line.replace('[', '', "g");
+line = line.replace(']', '', "g");
+line = line.replace('{', '', "g");
 line = line.replace('?', '', 'g');
 line = line.replace('?', '', 'g');
 }
