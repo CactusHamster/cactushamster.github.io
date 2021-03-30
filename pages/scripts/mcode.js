@@ -272,12 +272,38 @@ line = line.replace('?', '', 'g');
 }
 
 
+//End:
+if (line.includes('end')) {
+	line = 'end'
+}
 
 
 
 
+//Printflush:
+if (line.includes('printflush(')) {
+	//Get rid of ) at the end of function:
+	line = line.replace(')','')
+	//Add a space between the function and the value:
+	line = line.replace('(',' ')
+	//Get rid of quotes:
+	while (line.includes('"')) {line = line.replace('"', '');}
+	while (line.includes("'")) {line = line.replace("'", '');}
+}
 
 
+
+//Print:
+if (line.includes('print(')) {
+	//Get rid of ) at the end of function:
+	line = line.replace(')','')
+	line = line.replace(')','')
+	//Add a space between the function and the value:
+	line = line.replace('(',' ')
+	line = line.replace('(',' ')
+	//Get rid of single quotes:
+	while (line.includes("'")) {line = line.replace("'", '"');}
+}
 
 
 
