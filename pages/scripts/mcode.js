@@ -365,6 +365,9 @@ function explaination() {
 	}
 }
 
-function song7() {
-	new Audio('resources/game7.mp3').play()
-}
+
+
+
+
+var song7 = new Audio('resources/game7.mp3')
+function play(song) {song.play()}
