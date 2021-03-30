@@ -320,6 +320,16 @@ document.getElementById('file')
 }) 
 
 
-
-
+var explain = false;
+function explaination() {
+	if (explain == false) {
+		document.getElementById('explanation').innerHTML = '';
+		explain = true;
+	}
+	
+	else if (explain == true) {
+		document.getElementById('explanation').innerHTML = "\nDraw: \nLine: draw.line(x,y,x1,y1) \nPolygon: draw.poly(x,y,sides,radius,rotation) \nRectangle: draw.rect(x,y,width,height) \nTriangle: draw.triangle(x,y,x2,y2,x3,y3) \nImage: draw.image(x,y,@image,size,rotation) \nColor: draw.color(r,g,b,a) \nClear: draw.clear(r,g,b) \nStroke: draw.stroke(size) \ndrawflush(display) \n \nJump \nif (condition) {jump(line number)}\n \nVariables \nvar name = value \nvar name = value + value";
+		explain = false;
+	}
+}
 
