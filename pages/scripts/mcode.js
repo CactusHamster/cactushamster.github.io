@@ -237,18 +237,38 @@ jump 0 lessThanEq x false
 
 //Jump:
 if (line.includes('if') & line.includes('jump')) {
-line = line.replace('==', ' equal ');
-line = line.replace('===', ' strictEqual ');
-line = line.replace('!=', ' notEqual ');
-line = line.replace('<', ' greaterThan ');
-line = line.replace('>', ' lessThan ');
-line = line.replace('<=', ' lessThanEq ');
-line = line.replace('>=', ' greaterThanEq ');
+line = line.replace('==', ' ?equal? ');
+line = line.replace('===', ' ?strictEqual? ');
+line = line.replace('!=', ' ?notEqual? ');
+line = line.replace('<', ' ?greaterThan? ');
+line = line.replace('>', ' ?lessThan? ');
+line = line.replace('<=', ' ?lessThanEq? ');
+line = line.replace('>=', ' ?greaterThanEq? ');
+
+line = line.replace('(', ' [ ');
+line = line.replace(')', ' ] ');
+
+line = line.replace('if', '#');
+
+var bits = [
+	line.slice(0, line.indexOf('#')),
+	line.slice(line.indexOf('#'), line.indexOf('?')), 
+	line.slice(line.indexOf('?'), line.lastIndexOf('?')),
+]
+
+var lineInt = line.slice(line.lastIndexOf('('), line.lastIndexOf(')')); //Line to jump to
+var int1 = line.slice(line.indexOf('['), line.indexOf('?')); //First number in JUMP
+var int2 = line.slice(line.lastIndexOf('?'), line.lastIndexOf(']'));
+var operator = line.slice(line.indexOf('?'), line.lastIndexOf('?'));
 
 
+line = 'jump ' +' '+ lineInt +' '+ operator +' '+ int1 +' '+ int2;
 
-
-
+//Get rid of leftover symbols:
+line = line.replace('(', '', "g");
+line = line.replace('[', '', "g");
+line = line.replace('?', '', 'g');
+line = line.replace('?', '', 'g');
 }
 
 
