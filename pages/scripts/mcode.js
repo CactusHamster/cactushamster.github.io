@@ -140,21 +140,8 @@ if (!line.includes('var') & line.includes('=')) {
 
 
 //Draw:
-/*
-draw clear 0 0 0 0 0 0
-draw rect 0 0 0 0 0 0
-draw line 0 0 0 0 0 0
-draw color 0 0 0 255 0 0
-draw linePoly 0 0 0 0 0 0
-draw rect 0 0 0 0 0 0
-draw lineRect 0 0 0 0 0 0
-draw poly 0 0 0 255 0 0
-drawflush display1
-
-*/
 if (line.includes('draw') & !line.includes('drawflush')) {
 	var drawType = '';
-	
 	//Clear:
 	if (line.includes('clear')) {drawType = 'clear'}
 	//Color:
@@ -175,14 +162,11 @@ if (line.includes('draw') & !line.includes('drawflush')) {
 	else if (line.includes('.linePoly')) {drawType = 'triangle';}
 	//Image:
 	else if (line.includes('.linePoly')) {drawType = 'image';}
-	
 	//Filter function arguments:
 	var args = line.slice(line.indexOf('(')+1, line.indexOf(')'));
 	var argsArray = line.slice(line.indexOf('(')+1, line.indexOf(')')).split(",");
-	
 	//Draw based on the type of line.
 	switch (drawType) {
-		
 		case 'clear':
 		line = line.replace(',',' ')
 		line = 'draw clear ' + line.slice(line.indexOf('(')+1, line.indexOf(')'));
@@ -190,41 +174,46 @@ if (line.includes('draw') & !line.includes('drawflush')) {
 		line = line.replace(',',' ')
 		line = line.replace(',',' ')
 		break;
-		
 		case 'color':
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		line = 'draw color ' + line.slice(line.indexOf('(')+1, line.indexOf(')'));
 		line = line + ' 0 0'
 		break;
-		
 		case 'stroke':
 		line = 'draw stroke ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0 0 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
-		
 		case 'line':
 		line = 'draw line ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
-		
 		case 'rectangle':
 		line = 'draw rect ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
-		
 		case 'lineRect':
 		line = 'draw lineRect ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
-		
 		case 'poly':
 		line = 'draw poly ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0'
 		while (line.includes(',')) {line = line.replace(',',' ');}
 		break;
-		
-		
+		case 'linePoly':
+		line = 'draw linePoly ' + line.slice(line.indexOf('(')+1, line.indexOf(')')) + ' 0'
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		case 'triangle':
+		line = 'draw triangle ' + line.slice(line.indexOf('(')+1, line.indexOf(')'))
+		while (line.includes(',')) {line = line.replace(',',' ');}
+		break;
+		case 'image':
+		line = 'draw image ' + line.slice(line.indexOf('(')+1, line.indexOf(')'))
+		line = line.replace(',',' ');
+		line = line.replace('"', '');
+		line = line.replace("'", '');
+		break;
 	} //End of swootch
-
 } //End of Draw()
 
 //Drawflush:
@@ -239,17 +228,59 @@ if (line.includes('drawflush(')) {
 }
 
 
+
+/*
+draw clear 0 0 0 0 0 0
+jump 0 notEqual x false
+jump 0 lessThanEq x false
+*/
+
+//Jump:
+if (line.includes('if') & line.includes('jump')) {
+line = line.replace('==', ' equal ');
+line = line.replace('===', ' strictEqual ');
+line = line.replace('!=', ' notEqual ');
+line = line.replace('<', ' greaterThan ');
+line = line.replace('>', ' lessThan ');
+line = line.replace('<=', ' lessThanEq ');
+line = line.replace('>=', ' greaterThanEq ');
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //No double spaces:
-line = line.replace('  ', ' ')
-line = line.replace('  ', ' ')
-line = line.replace('  ', ' ')
+line = line.replace('  ', ' ', "g")
 while (line.includes('  ')) {line = line.replace('  ', ' ');}
 
 //Output the finished product:
-output(line)
-
-
+if (line != '') {output(line)}
 }//End of line's FOR:
+
+
+
 }
 
 
