@@ -365,3 +365,7 @@ function explaination() {
 	}
 }
 
+//resources/game7.mp3
+function playSong(songPath) {
+	new Audio('songPath').play()
+}
