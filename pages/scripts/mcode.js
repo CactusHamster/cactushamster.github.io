@@ -66,13 +66,13 @@ if (line.slice(0,2) == '//') {line = ''}
 //line = line.replace(';', '');
 
 //SET:
-if (line.includes('var')) {
+if (line.includes('var') & !line.includes('getLink')) {
 	line = line.replace('var', 'set');
 	line = line.replace('=', '');
 }
 
 //Operators
-if (!line.includes('var') & line.includes('=')) {
+if (!line.includes('var') & line.includes('=') & !line.includes('getLink')) {
 	//FINISH: Add in the rest of the operators
 	line = line.replace('+', ' ?add? ');
 	line = line.replace('-', ' ?sub? ');
@@ -305,8 +305,14 @@ if (line.includes('print(')) {
 	while (line.includes("'")) {line = line.replace("'", '"');}
 }
 
-
-
+//Get Link
+if (line.includes('getLink')) {
+	linkInt = line.slice(line.indexOf('(')+1, line.indexOf(')'));
+	linkVar = line.slice(0, line.indexOf('='));
+	line = 'getlink ' + linkVar +' '+ linkInt;
+	
+	
+}
 
 
 
@@ -354,7 +360,7 @@ function explaination() {
 	}
 	
 	else if (explain == true) {
-		document.getElementById('explanation').innerHTML = "\nDraw: \nLine: draw.line(x,y,x1,y1) \nPolygon: draw.poly(x,y,sides,radius,rotation) \nRectangle: draw.rect(x,y,width,height) \nTriangle: draw.triangle(x,y,x2,y2,x3,y3) \nImage: draw.image(x,y,@image,size,rotation) \nColor: draw.color(r,g,b,a) \nClear: draw.clear(r,g,b) \nStroke: draw.stroke(size) \ndrawflush(display) \n \nJump \nif (condition) {jump(line number)}\n \nVariables \nvar name = value \nvar name = value + value \n\nPrint: \nprintflush(message)\nprint('text')";
+		document.getElementById('explanation').innerHTML = "\nDraw: \nLine: draw.line(x,y,x1,y1) \nPolygon: draw.poly(x,y,sides,radius,rotation) \nRectangle: draw.rect(x,y,width,height) \nTriangle: draw.triangle(x,y,x2,y2,x3,y3) \nImage: draw.image(x,y,@image,size,rotation) \nColor: draw.color(r,g,b,a) \nClear: draw.clear(r,g,b) \nStroke: draw.stroke(size) \ndrawflush(display) \n \nJump \nif (condition) {jump(line number)}\n \nVariables \nvar name = value \nvar name = value + value \n\nPrint: \nprintflush(message)\nprint('text') \n\nGet Link\nname = getlink(link#)";
 		explain = false;
 	}
 }
