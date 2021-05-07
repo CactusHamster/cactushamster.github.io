@@ -1,10 +1,3 @@
-var squarex = 0
-var squarey = 0
-var squarevx = 1
-var square vy = 1
-
-
-
 //Random number function from w2schools
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -26,7 +19,20 @@ this.addEventListener('keypress', event => {
 
 
 
+//Just a simple clock script
+var timeVar = setInterval(Time, 1000);
 
+function Time() {
+  var d = new Date();
+  document.getElementById("time").innerHTML = d.toLocaleTimeString();
+}
+
+
+//Tells me what canvasclick is at
+var timeVar = setInterval(CanvasClickQuery, 1000);
+function CanvasClickQuery() {
+  document.getElementById("click").innerHTML = canvasclick;
+}
 
 
 
@@ -42,10 +48,10 @@ function Update() {
 
 
 console.log('Hai there')
-/*
+
 brush.font = "30px Arial";
 brush.strokeText("Hai", 10, 50);
-*/
+
 
 function drawLine (beginx, beginy, endx, endy) {
 brush.moveTo(beginx, beginy);
@@ -54,11 +60,7 @@ brush.stroke();
 }
 
 
-function square () {
-	
-	
-	
-	
+function paint() {
 }
 
 

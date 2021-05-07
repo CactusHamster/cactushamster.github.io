@@ -7,14 +7,20 @@ var roomName = '';
 var commandType = '';
 var passwordAuth = '';
 commandType2 = '';
+var aToken = '';
+
+var password = ''
 
 document.location.origin = 'HAMSTER_HEHEHEHE'
 
 function initWebex(token) {
+aToken = token;
 webex = window.Webex.init({
   credentials: {
     access_token: token}
 });
+stopEvents();
+stopEvents();
 stopEvents();
 eventStart();
 }
@@ -469,6 +475,7 @@ function prepareCommand() {
 			}
 		break;
 	}
+	
 }
 
 
@@ -478,7 +485,7 @@ function prepareCommand() {
 
 
 function run() {
-	
+	if (password == 'hamster' | aToken != 'NGQ0NTU3ZjgtODhmMi00OTdjLWE5Y2QtNzFkZmNlMTJkYzg0N2Y5ZWQzYjEtMDUx_PF84_011f8b79-70e7-45af-852e-e7e46203c1ff') {
 		switch (commandType) {
 		
 		case 'room':
@@ -696,7 +703,7 @@ function run() {
 			}
 		break;
 	}
-	
+		} else {output.value= "Please enter your password."} //End of password if-then	
 }
 
 
