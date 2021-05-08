@@ -4,21 +4,17 @@
 
 
 
-<html lang="en">
+<html lang="en" class = 'all'>
 
 	<head>
 		<title>Simon's Site</title>
 		<link rel="icon" href="Images/favicons/favicon-96x96.png" type="image/x-icon" width="256" height="256">
-		<!--<link rel="stylesheet" type="text/css" href="/index.css" />-->
+		<link rel="stylesheet" type="text/css" href="index.css" />
 	</head>
 
 	<body>
 	
-		<canvas id="Canvas" width="1000" height="1000" style="border:1px solid #000000; /*cursor:url(https://cdn.custom-cursor.com/db/6011/32/kirby-magolor-pointer.png) , pointer!important*/"></canvas>
-		<p id="time"></p>
-		<p id="click"></p>
-		
-		
+		<canvas id="Canvas" class="canvas1"></canvas>
 		
 	</body>
 	
@@ -27,37 +23,26 @@
 	
 	
 	
-	<script>
-	var brush = Canvas.getContext('2d');
-	var canvasclick = false
-	var paintsize = 1
-	var mouseX, mouseY
-	</script>
 	
 	
 	
 
 <script>
-onmousemove = function(e){mouseX = e.clientX; mouseY = e.clientY;}
 
-Canvas.onwheel = function (e) {paintSize=paintsize+1;}
-Canvas.onmousedown = function (e) {canvasclick=true;}
-Canvas.onmouseup = function (e) {canvasclick=false;}
 
+Canvas.onwheel = function (e) {'Wheel scrolled'}
+Canvas.onmousedown = function (e) {console.log('clicked')}
+Canvas.onmouseup = function (e) {console.log('unclicked')}
+/*
 Canvas.onkeydown = function () {
 console.log('key pressed')
 }
+*/
 
 
 
 
 
-Canvas.onmousemove = function () {
-	console.log(canvasclick)
-		if (canvasclick == true) {
-		paint()
-	}
-}
 
 
 
@@ -77,6 +62,4 @@ Canvas.onmousemove = function () {
 
 <script src="index.js"></script>
 
-
-<!--<script src="./test_files/core.js.download"></script>-->
 

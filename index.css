@@ -1,3 +1,17 @@
-.canvas{
+/*.canvas{
 cursor: auto;
+}*/
+
+
+.canvas1 {
+	border: 1px solid #000000;
+	/*cursor:url(https://cdn.custom-cursor.com/db/6011/32/kirby-magolor-pointer.png) , pointer!important*/
+	color: green;
+	width: 1180px;
+	height: 590px;
+}
+
+.all {
+	/*text-align: center;
+	align: center;*/
 }
