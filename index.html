@@ -14,8 +14,14 @@
 
 	<body>
 	
-		<canvas id="Canvas" class="canvas1"></canvas>
-		
+		<canvas id="Canvas" width="1180" height="590" class="canvas1"></canvas>
+		<br>
+		<label>Create rectangle: </label>
+		<input placeholder="X" id="rectXInput" class="rectangleInput"></input>
+		<input placeholder="Y" id="rectYInput" class="rectangleInput"></input>
+		<input placeholder="Width" id="rectWidthInput" class="rectangleInput"></input>
+		<input placeholder="Height" id="rectHeightInput" class="rectangleInput"></input>
+		<input id="rectSettingsButton" value="Create!" class="rectangleInputButton" type="button"></input>
 	</body>
 	
 </html>
@@ -29,24 +35,18 @@
 
 <script>
 
-
+/*
 Canvas.onwheel = function (e) {'Wheel scrolled'}
 Canvas.onmousedown = function (e) {console.log('clicked')}
 Canvas.onmouseup = function (e) {console.log('unclicked')}
+*/
+
+
 /*
 Canvas.onkeydown = function () {
 console.log('key pressed')
 }
 */
-
-
-
-
-
-
-
-
-
 
 </script>
 
@@ -60,6 +60,7 @@ console.log('key pressed')
 
 
 
+<script src="setup.js"></script>
+<script src="core.js"></script>
 <script src="index.js"></script>
-
-
+<script src="level.js"></script>
