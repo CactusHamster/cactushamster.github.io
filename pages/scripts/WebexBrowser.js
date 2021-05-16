@@ -26,7 +26,7 @@ eventStart();
 }
 
 //Use Pineapple by default on load.
-initWebex('NGQ0NTU3ZjgtODhmMi00OTdjLWE5Y2QtNzFkZmNlMTJkYzg0N2Y5ZWQzYjEtMDUx_PF84_011f8b79-70e7-45af-852e-e7e46203c1ff');
+initWebex('YmQ2MWI4ZjctNGE4Zi00ZDgwLThjNTYtMjIzYzhlOWE2NGZiZDQ5OTQ3MDgtNmEy_PF84_011f8b79-70e7-45af-852e-e7e46203c1ff');
 deleteRoomList();
 MakeRoomList();
 
@@ -58,11 +58,30 @@ tokenIsSet();
 
 
 
+//Token button
+PineappleAuth.onclick = function (e) {
+	prepareCommand()
+	
+//try{
+initWebex('YmQ2MWI4ZjctNGE4Zi00ZDgwLThjNTYtMjIzYzhlOWE2NGZiZDQ5OTQ3MDgtNmEy_PF84_011f8b79-70e7-45af-852e-e7e46203c1ff');
+document.getElementById("change").innerHTML = 'Authtoken changed!'
+document.getElementById("change").style = 'color:#1d8212'
+
+setTimeout(function(){ 
+document.getElementById("change").innerHTML = '-------------------------'
+document.getElementById("change").style = 'color:#000000'
+}, 3000);
+tokenIsSet();
+} //End of function
+
+
+
+
 
 
 
 //Token button
-PineappleAuth.onclick = function (e) {
+PineappleOldAuth.onclick = function (e) {
 	prepareCommand()
 	
 //try{
@@ -88,6 +107,11 @@ document.getElementById("tokenBox").value = 'NGQ0NTU3ZjgtODhmMi00OTdjLWE5Y2QtNzF
 };//End of catch*/
 tokenIsSet();
 } //End of function
+
+
+
+
+
 
 
 
