@@ -511,7 +511,7 @@ function prepareCommand() {
 
 
 function run() {
-	if (password == 'simon' | aToken != 'NGQ0NTU3ZjgtODhmMi00OTdjLWE5Y2QtNzFkZmNlMTJkYzg0N2Y5ZWQzYjEtMDUx_PF84_011f8b79-70e7-45af-852e-e7e46203c1ff') {
+	if (password == 'parrot' | aToken != 'NGQ0NTU3ZjgtODhmMi00OTdjLWE5Y2QtNzFkZmNlMTJkYzg0N2Y5ZWQzYjEtMDUx_PF84_011f8b79-70e7-45af-852e-e7e46203c1ff') {
 		switch (commandType) {
 		
 		case 'room':
