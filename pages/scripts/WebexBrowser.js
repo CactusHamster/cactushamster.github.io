@@ -55,7 +55,9 @@ document.getElementById("change").style = 'color:#000000'
 tokenIsSet();
 } //End of function
 
-
+runEval.onclick = function (event) {
+	output.value = eval(evalBox.value)
+}
 
 
 //Token button
