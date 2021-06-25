@@ -1,0 +1,77 @@
+
+
+
+<head>
+	<title>UwU Furspeak Generator</title>
+	<!-- https://favicon.io/ -->
+	<!--<link rel="icon" href="images/favicon-96x96.png" type="image/x-icon" width="256" height="256">-->
+	<link rel="stylesheet" href="css/uwu.css" />
+	<meta charset="UTF-8">
+	<link href="https://allfont.net/allfont.css?fonts=scrawl" rel="stylesheet" type="text/css" />
+	<!-- https://transfonter.org/ -->
+	<link href='fonts/escrawl/stylesheet.css' rel="stylesheet" type="text/css" />
+	<title>UwU Furspeak Translator</title>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="images/uwufavicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/uwufavicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/uwufavicon/favicon-16x16.png">
+	<link rel="manifest" href="images/uwufavicon/site.webmanifest">
+	<link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+
+</head>
+
+
+
+
+
+<body>
+<div class="titleDiv">
+	<p style="font-size:48px;">Hewwo!</p>
+	<p>weclom to my fuwspeak genewatow</p>
+</div>
+	<textarea id='inputText' class="inputText"></textarea>
+	<br><div class="convertButtonDiv">
+	<input id="convertButton" class="convertButton" value="Convewt" type="button"></input>
+	<br></div>
+	<textarea id='inputText' class="inputText"></textarea>
+	
+	
+</body>
+
+
+
+
+
+
+
+<script>
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+function UwU() {
+	var owo = ['UwU','OwO']
+	return owo[random(1,2)-1]
+}
+function uwu() {
+	var owo = ['uwu','owo']
+	return owo[random(1,2)-1]
+}
+function furSpeak (text) {
+	text = text.replace(/r/g, 'w')
+	text = text.replace(/l/g, 'w')
+	text = text.replace(/the/g, 'teh')
+	//text = text.replace(/\?/g, uwu()+'?')
+	//text = text.replace(/\!/g, uwu()+'?')
+	var textArray = text.split(' ')
+	
+	var returnText = '';
+	for (var word of textArray) {
+		if (random(1,8) == 1){ //1 uwu in 9 word sentence, 2 in 18 word sentence, etc.
+			returnText = returnText+uwu()+' '+word+' '
+		} else {
+			returnText = returnText+word+' '
+		}
+	}
+	return returnText
+}
+</script>
