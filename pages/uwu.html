@@ -73,6 +73,7 @@ function furSpeak (text) {
 	text = text.replace(/r/g, 'w')
 	text = text.replace(/l/g, 'w')
 	text = text.replace(/the/g, 'teh')
+	text = text.replace(/'/g, '')
 	//text = text.replace(/\?/g, uwu()+'?')
 	//text = text.replace(/\!/g, uwu()+'?')
 	var textArray = text.split(' ')
