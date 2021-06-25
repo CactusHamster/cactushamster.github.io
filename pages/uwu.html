@@ -24,7 +24,7 @@
 
 
 
-<body>
+<body spellcheck="false">
 <div class="titleDiv">
 	<p style="font-size:48px;">Hewwo!</p>
 	<p>weclom to my fuwspeak genewatow</p>
@@ -33,8 +33,16 @@
 	<br><div class="convertButtonDiv">
 	<input id="convertButton" class="convertButton" value="Convewt" type="button"></input>
 	<br></div>
-	<textarea id='inputText' class="inputText"></textarea>
+	<textarea id='outputText' class="outputText"></textarea>
+	<br><div class="convertButtonDiv">
 	
+	<div class="tooltip">
+	<input id="copyButton" class="convertButton" value="Copy" type="button" onmouseout="outFunc()">
+	<span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+	</input>
+	</div>
+	
+	</div>
 	
 </body>
 
@@ -72,6 +80,27 @@ function furSpeak (text) {
 			returnText = returnText+word+' '
 		}
 	}
+	returnText = returnText.slice(0, returnText.length-1)
 	return returnText
+}
+
+convertButton.onclick = function (e) {outputText.value = furSpeak(inputText.value)}
+inputText.onkeyup = function (e) {outputText.value = furSpeak(inputText.value)}
+
+copyButton.onclick = function (e) {
+var output = document.getElementById("outputText");
+output.select();
+output.setSelectionRange(0, 99999);
+document.execCommand("copy");
+var tooltip = document.getElementById("myTooltip");
+tooltip.innerHTML = "Copied: " + outputText.value;
+}
+
+
+
+function outFunc() {
+var tooltip = document.getElementById("myTooltip");
+tooltip.innerHTML = "Copy to clipboard";
+
 }
 </script>
