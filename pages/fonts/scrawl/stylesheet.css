@@ -1,0 +1,10 @@
+@font-face{
+	font-family:scrawl;
+	font-style:normal;
+	font-weight:400;
+	src:local('Scrawl'),
+	local('Scrawl-Regular Scrawl'),
+	url('scrawl.woff') 
+	format('woff'),
+	url('scrawl.ttf') 
+	format('truetype')}
