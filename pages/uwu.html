@@ -70,8 +70,8 @@ function uwu() {
 	return owo[random(1,2)-1]
 }
 function furSpeak (text) {
-	text = text.replace(/n(?![n])\B/g, 'ny')
-	text = text.replace(/N(?![n])\B/g, 'Ny')
+	text = text.replace(/n(?![n])(?=[aeiou])/g, 'ny')
+	text = text.replace(/N(?![n])(?=[aeiou])/g, 'Ny')
 	text = text.replace(/Love/g, 'Wuv')
 	text = text.replace(/love/gi, 'wuv')
 	text = text.replace(/lol/gi, UwU())
