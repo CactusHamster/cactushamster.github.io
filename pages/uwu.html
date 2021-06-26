@@ -70,8 +70,12 @@ function uwu() {
 	return owo[random(1,2)-1]
 }
 function furSpeak (text) {
+	text = text.replace(/Love/g, 'Wuv')
+	text = text.replace(/love/gi, 'wuv')
 	text = text.replace(/r/g, 'w')
-	text = text.replace(/l/g, 'w')
+	text = text.replace(/R/g, 'W')
+	text = text.replace(/l/g, 'l')
+	text = text.replace(/L/g, 'W')
 	text = text.replace(/the/g, 'teh')
 	text = text.replace(/'/g, '')
 	//text = text.replace(/\?/g, uwu()+'?')
