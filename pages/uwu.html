@@ -55,6 +55,7 @@
 
 
 <script>
+var extraFilter = false;
 console.log(UwU())
 
 
@@ -70,15 +71,17 @@ function uwu() {
 	return owo[random(1,2)-1]
 }
 function furSpeak (text) {
-	text = text.replace(/n(?![n])(?=[aeiou])/g, 'ny')
-	text = text.replace(/N(?![n])(?=[aeiou])/g, 'Ny')
 	text = text.replace(/Love/g, 'Wuv')
 	text = text.replace(/love/gi, 'wuv')
 	text = text.replace(/lol/gi, UwU())
 	text = text.replace(/l/g, 'w')
 	text = text.replace(/L/g, 'W')
+	if (extraFilter) {
+	text = text.replace(/n(?![n])(?=[aeiou])/g, 'ny')
+	text = text.replace(/N(?![n])(?=[aeiou])/g, 'Ny')
 	text = text.replace(/m/g, 'mn')
 	text = text.replace(/M/g, 'Mn')
+	}
 	text = text.replace(/r/g, 'w')
 	text = text.replace(/R/g, 'W')
 	text = text.replace(/the/g, 'teh')
