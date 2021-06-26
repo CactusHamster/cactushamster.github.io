@@ -70,6 +70,8 @@ function uwu() {
 	return owo[random(1,2)-1]
 }
 function furSpeak (text) {
+	text = text.replace(/n(?![n])\B/g, 'ny')
+	text = text.replace(/N(?![n])\B/g, 'Ny')
 	text = text.replace(/Love/g, 'Wuv')
 	text = text.replace(/love/gi, 'wuv')
 	text = text.replace(/r/g, 'w')
@@ -86,6 +88,8 @@ function furSpeak (text) {
 	for (var word of textArray) {
 		if (random(1,8) == 1){ //1 uwu in 9 word sentence, 2 in 18 word sentence, etc.
 			returnText = returnText+uwu()+' '+word+' '
+		} else if (random(1,25) == 1) {
+			returnText = returnText+'awoo'+' '+word+' '
 		} else {
 			returnText = returnText+word+' '
 		}
