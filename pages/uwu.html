@@ -56,7 +56,8 @@
 
 <script>
 var extraFilter = false;
-var uwuProbability = 14;
+var uwuProbability = 12;
+var awooProbability = 35;
 console.log(UwU())
 
 
@@ -93,7 +94,7 @@ function furSpeak (text) {
 	for (var word of textArray) {
 		if (random(1,uwuProbability) == 1){ //1 uwu in 9 word sentence, 2 in 18 word sentence, etc.
 			returnText = returnText+uwu()+' '+word+' '
-		} else if (random(1,40) == 1) {
+		} else if (random(1,awooProbability) == 1) {
 			returnText = returnText+'awoo'+' '+word+' '
 		} else {
 			returnText = returnText+word+' '
