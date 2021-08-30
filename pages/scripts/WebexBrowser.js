@@ -755,9 +755,7 @@ for (const i of document.getElementsByClassName("roomSelectList")) {console.log(
 }//End of function
 
 function MakeRoomList() {
-webex.rooms.list({ //List rooms with SDK
-max: 50
-})
+webex.rooms.list() //List rooms with SDK
 .then((rooms) => {
 console.log('Listing rooms:')
       for (const room of rooms.items) {
