@@ -22,7 +22,12 @@ HTMLCanvasElement.prototype.relativeCoords = function(event) {
   //Return as an array
   return [x,y];
 }
-
+HTMLCanvasElement.prototype.download = function () {
+  var link = document.createElement('a');
+  link.download = 'mandel.png';
+  link.href = this.toDataURL()
+  link.click();	
+}
 
 
 
