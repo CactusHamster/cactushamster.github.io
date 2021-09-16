@@ -127,21 +127,37 @@ let zoomCY = 300
 let zoomFactor = 1
 
 
-
-
-
-
-
-canvas.addEventListener("mousedown", function (e) {
+function triggerZoom(e) {
 	var coords = canvas.relativeCoords(e)
-	var zoomF = eval(eval('zoomAmount.value'))
-	if (zoomF == 0 ) zoomF = 3/10
-	console.info(zoomF)
-	
+	var zoomF = Number(eval(zoomAmount.value))
+	if (zoomF == 0  || zoomF == undefined || isNaN(zoomF)) {zoomF = 3/10}
 	zoom(Math.round(coords[0]), Math.round(coords[1]), zoomF);
 	zoomCX = coords[0]
 	zoomCY = coords[1]
-}, false);
+}
+function triggerZoom2(e) {
+	var coords = canvas.relativeCoords(e)
+	var zoomF = Number(eval(zoomAmount2.value))
+	//console.info(zoomF)
+	if (zoomF == 0  || zoomF == undefined || isNaN(zoomF)) {zoomF = 10/3}
+	//console.info(zoomF)
+	zoom(Math.round(coords[0]), Math.round(coords[1]), zoomF);
+	zoomCX = coords[0]
+	zoomCY = coords[1]
+}
+
+
+
+canvas.addEventListener('mousedown', function (event) {
+	// e.button === 0: the left button is clicked
+    // e.button === 1: the middle button is clicked
+    // e.button === 2: the right button is clicked
+    // e.button === 3: the `Browser Back` button is clicked
+    // e.button === 4: the `Browser Forward` button is clicked
+	if (event.button == 0) triggerZoom(event)
+	else triggerZoom2(event)
+
+})
 
 var context = canvas.getContext('2d');
 mandel();
