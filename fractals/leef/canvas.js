@@ -31,6 +31,6 @@ HTMLCanvasElement.prototype.download = function () {
   link.click();	
 }
 
-body.onload = function () {
+document.getElementsByName('body')[0].onload = function () {
 	render()
 }
