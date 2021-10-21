@@ -6,12 +6,13 @@ iterationSlider.oninput = function () {
 
 
 function render () {
-	ctx.fillStyle = "black";
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	
 	//let iterations = 255*500
 	let iterations = Number(iterationSlider.value); if (iterations < 1 || isNaN(iterations)) iterations = 40000
 	let res = Number(resbox.value); if (res < 1 || isNaN(res)) res = 4
+	let s = Number(sizebox.value); if (s < 1 || isNaN(s)) s = 600; canvas.width = s; canvas.height = s
+	
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, s, s);
 	
 	let i = 0
 	let x=0, y=0
@@ -36,10 +37,10 @@ function render () {
         }
 
         // Scaling and positioning
-        let plotX = canvas.width * (x + 3) / 6;
-        let plotY = canvas.height - canvas.height * ((y + 2) / 14);
-		console.info(x)
-		console.info(y)
+        let plotX = s * (x + 3) / 6;
+        let plotY = s - s * ((y + 2) / 14);
+		//console.info(x)
+		//console.info(y)
 
 
 		ctx.fillStyle = "green"
