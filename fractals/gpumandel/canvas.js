@@ -1,5 +1,3 @@
-//var canvas = document.getElementById('canvas');
-//var ctx = canvas.getContext('2d');
 
 HTMLCanvasElement.prototype.relativeCoords = function(event) {
   var x,y;
@@ -31,6 +29,6 @@ HTMLCanvasElement.prototype.download = function () {
   link.click();	
 }
 
-body.onload = function () {
+document.getElementsByName('body')[0].onload = function () {
 	render()
 }

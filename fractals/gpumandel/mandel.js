@@ -173,11 +173,8 @@ const gpu = new GPU({
 let s = 1200 //S
 
 let GPUsettings = {
-	output: { x: s, y: s},
-	constants: {size: s}
+	output: { x: s, y: s}
 }
-canvas.width = s
-canvas.height = s
 
 
 function prop (oldNum, newmin, newmax, oldmin, oldmax) {var newNum = ((oldNum - oldmin) / (oldmax - oldmin) ) * (newmax - newmin) + newmin; return newNum}
@@ -202,7 +199,7 @@ const mkernel = gpu.createKernel(function (it, xm, ym, xma, yma, size) {
 	this.color(a[0], a[1], a[2])
 }, GPUsettings)
 .setGraphical(true)
-
+mkernel.kernel.dynamicOutput = true
 mkernel.addFunction(prop)
 mkernel.addFunction(color1)
 
@@ -213,9 +210,17 @@ mkernel.addFunction(color1)
 //let out = mkernel(6)
 let IT = 255
 
-function render () {
-	let iterations = iterationBox.value; if (iterations == 0 || isNaN(iterations)) iterations = IT;
-	mkernel(iterations, min.x, min.y, max.x, max.y, s)
+sizebox.addEventListener('input', function () {
+	s = Number(sizebox.value); if (isNaN(s) || s < 1) s = 1200
+	canvas.width = s; canvas.height = s;
+	render()
+})
+
+
+async function render () {
+	let iterations = Number(iterationBox.value); if (iterations == 0 || isNaN(iterations)) iterations = IT;
+	await mkernel.setOutput({x: s, y: s})
+	await mkernel(iterations, min.x, min.y, max.x, max.y, s)
 }
 
 /*

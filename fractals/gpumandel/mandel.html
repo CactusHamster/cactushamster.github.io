@@ -39,9 +39,10 @@ input {
 
 </style>
 
-<body id="body" style="text-align: center;">
-<canvas id="canvas" width=600 height=600 oncontextmenu="return false;"></canvas>
+<body id="body" style="text-align:center;">
+<canvas id="canvas" width=1200 height=1200 oncontextmenu="return false;"></canvas>
 <br>
+<input id="sizebox" placeholder="Size"></input>
 <input id="iterationBox" placeholder="Iterations (255)"></input>
 <br>
 <input id="resetButton" type="button" value="Reset!" onclick="reset()" title="Resets the fractal and its settings to default"></input>
@@ -66,7 +67,8 @@ input {
 <p style="color:#4f505b">
 Controls:
 WSAD to move camera, +/- to zoom in and out<br/>
-Hold the mouse over a control for an explanation
+Hold the mouse over a control for an explanation<br/>
+Use ctrl+shift+r for a fast reload
 </p>
 
 
