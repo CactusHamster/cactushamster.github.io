@@ -170,7 +170,7 @@ const gpu = new GPU({
 })
 
 
-let s = 1200 //S
+let s = 700 //S
 
 let GPUsettings = {
 	output: { x: s, y: s}
@@ -211,7 +211,7 @@ mkernel.addFunction(color1)
 let IT = 255
 
 sizebox.addEventListener('input', function () {
-	s = Number(sizebox.value); if (isNaN(s) || s < 1) s = 1200
+	s = Number(sizebox.value); if (isNaN(s) || s < 1) s = 700
 	canvas.width = s; canvas.height = s;
 	render()
 })
