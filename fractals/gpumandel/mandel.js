@@ -161,7 +161,6 @@ function color1 (i) { //For 255 iteration mandelbrot
 
 
 
-let s = 600
 
 const gpu = new GPU({
 	canvas: canvas,
@@ -170,20 +169,26 @@ const gpu = new GPU({
 	
 })
 
+
+let s = 1200 //S
+
 let GPUsettings = {
-	output: { x: 600, y: 600},
-	constants: {size: 600}
+	output: { x: s, y: s},
+	constants: {size: s}
 }
+canvas.width = s
+canvas.height = s
+
 
 function prop (oldNum, newmin, newmax, oldmin, oldmax) {var newNum = ((oldNum - oldmin) / (oldmax - oldmin) ) * (newmax - newmin) + newmin; return newNum}
 
 
 
-const mkernel = gpu.createKernel(function (it, xm, ym, xma, yma) {
+const mkernel = gpu.createKernel(function (it, xm, ym, xma, yma, size) {
 	let x = this.thread.x
 	let y = this.thread.y
-	let cx = (x/600) * (xma - xm) + xm
-	let cy = (y/600) * (yma - ym) + ym
+	let cx = (x/size) * (xma - xm) + xm
+	let cy = (y/size) * (yma - ym) + ym
 	let zx = 0
 	let zy = 0
 	let i = 0
@@ -207,9 +212,10 @@ mkernel.addFunction(color1)
 //let out = mkernel(input(255))
 //let out = mkernel(6)
 let IT = 255
+
 function render () {
 	let iterations = iterationBox.value; if (iterations == 0 || isNaN(iterations)) iterations = IT;
-	mkernel(iterations, min.x, min.y, max.x, max.y)
+	mkernel(iterations, min.x, min.y, max.x, max.y, s)
 }
 
 /*
