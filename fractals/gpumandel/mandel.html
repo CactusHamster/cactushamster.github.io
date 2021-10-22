@@ -1,0 +1,121 @@
+<style>
+input {
+	text-align: center;
+	width:110px
+}
+:root {
+  --slider-color: #1f1fff;;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 2%; 
+  background: #1f1fff;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 2%;
+  background: var(--slider-color);
+  cursor: pointer;
+}
+
+</style>
+
+<body id="body" style="text-align: center;">
+<canvas id="canvas" width=600 height=600 oncontextmenu="return false;"></canvas>
+<br>
+<input id="iterationBox" placeholder="Iterations (255)"></input>
+<br>
+<input id="resetButton" type="button" value="Reset!" onclick="reset()" title="Resets the fractal and its settings to default"></input>
+<input id="renderButton" type="button" value="Render!" style="width:70px" onclick="render()" title="Applies settings changes ad rerenders the fractal"></input>
+<input id="downloader" type="button" value="Download!" onclick="canvas.download()"title="Downloads the current canvas as a png image"></input>
+<br>
+
+<input id="transbox" title="Translate Modifier" placeholder="Translate Modifier"></input>
+<input title="Zoom Modifier" placeholder="Zoom Modifier" id="zoombox"></input>
+<br>
+<label><input type="range" min="0" max="6" step="0.001" value="1" id="transSlider" class="slider" title="Translation Modifier"/></label>
+<input type="range" min="1.01" max="3" step="0.001" value="2" id="zoomSlider" class="slider" title="Zoom Modifier"/>
+
+<div id="juliaControls">
+	
+</div>
+
+
+
+<br>
+<br>
+<p style="color:#4f505b">
+Controls:
+WSAD to move camera, +/- to zoom in and out<br/>
+Hold the mouse over a control for an explanation
+</p>
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<p>Advanced</p>
+<input placeholder="x min" id="xminBox" title="min x"/>
+<input placeholder="y min" id="yminBox" title="min y"/>
+<br/>
+<input placeholder="x max" id="xmaxBox" title="max x"/>
+<input placeholder="y max" id="ymaxBox" title="max y" />
+</body>
+
+<script src="canvas.js"></script>
+<script>
+
+
+xminBox.oninput = function () {
+	min.x = Number(xminBox.value)
+	min.y = Number(yminBox.value)
+	max.x = Number(xmaxBox.value)
+	max.y = Number(ymaxBox.value)
+}
+yminBox.oninput = function () {
+	min.y = Number(yminBox.value)
+	min.x = Number(xminBox.value)
+	max.x = Number(xmaxBox.value)
+	max.y = Number(ymaxBox.value)
+}
+xmaxBox.oninput = function () {
+	max.x = Number(xmaxBox.value)
+	min.x = Number(xminBox.value)
+	min.y = Number(yminBox.value)
+	max.y = Number(ymaxBox.value)
+}
+ymaxBox.oninput = function () {
+	max.y = Number(ymaxBox.value)
+	min.x = Number(xminBox.value)
+	min.y = Number(yminBox.value)
+	max.x = Number(xmaxBox.value)
+}
+
+
+
+
+</script>
+
+<script src="gpu-browser.min.js"></script>
+<script src="mandel.js"></script>
