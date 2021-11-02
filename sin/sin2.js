@@ -27,9 +27,6 @@ function makeColorGradient(i, frequency1, frequency2, frequency3, phase1, phase2
 	var red = Math.sin((frequency1 * i) + phase1) * width + center;
 	var grn = Math.sin((frequency2 * i) + phase2) * width + center;
 	var blu = Math.sin((frequency3 * i) + phase3) * width + center;
-	if (!isNaN(red)) clrs['r'].push(red)
-	if (!isNaN(blu)) clrs['g'].push(grn)
-	if (!isNaN(grn)) clrs['b'].push(blu)
 	return RGB2Color(red,grn,blu)
 }
 
@@ -38,29 +35,10 @@ function render () {
 	for (let ctrli in ctrls) { if (ctrli > 2) frequencies[ctrli-3] = Number(ctrls[ctrli].value); else phases[ctrli] = Number(ctrls[ctrli].value); }
 	for (cti in ctrls2) {CenWid[cti] = Number(ctrls2[cti].value);}
 	
-	clrs = {r: [], g: [], b: []}
 	for (let x=0;x<w;x++) {
 		let clr = makeColorGradient(x, ...frequencies, ...phases, ...CenWid)
 		ctx.fillStyle = clr
 		ctx.fillRect(x, 0, 1, h)	
-	}
-	
-	let b = []
-	sictx.fillStyle = 'black'
-	sictx.fillRect(0, 0, w2, h2)
-	for (let x=0;x<w2;x++) {
-		for (let ctype in clrs) {
-			b.push(ctype)
-			if (ctype == 'r') sictx.fillStyle = 'rgb(255, 0, 0)'
-			else if (ctype == 'g') sictx.fillStyle = 'rgb(0, 255, 0)'
-			else sictx.fillStyle = 'rgb(0, 0, 255)'
-			//let max = Math.max(Math.max(...clrs['r']), Math.max(...clrs['g']), Math.max(...clrs['b']))
-			//let min = Math.min(Math.min(...clrs['r']), Math.min(...clrs['g']), Math.min(...clrs['b']))
-			for (let clr of clrs[ctype]) {
-				sictx.fillRect(x, 0, 1, 40)
-			}
-		
-		}
 	}
 	console.log(b)
 	
