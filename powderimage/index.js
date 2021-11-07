@@ -52,20 +52,17 @@ imageInput.addEventListener('change', function (e) {
   rd.readAsDataURL(file);
   rd.addEventListener('load', function () {
     ctxImage.src = this.result
-    ctxImage.onload = function () {
-      if (this.width > canvas.width || this.height > canvas.height) {
-        let xy = calculateAspectRatioFit(this.width, this.height, simSize.w-8, simSize.h-8)
-        ctxImage.width = xy.width
-        ctxImage.height = xy.height
-      }
-      render()
-      //imageX = 0
-      //imageY = 0
-    }
   })
 })
 
-
+ctxImage.onload = function () {
+  if (this.width > canvas.width || this.height > canvas.height) {
+    let xy = calculateAspectRatioFit(this.width, this.height, simSize.w-8, simSize.h-8)
+    ctxImage.width = xy.width
+    ctxImage.height = xy.height
+  }
+  render()
+}
 
 
 
