@@ -85,10 +85,10 @@ function generateScript() {
 			  if (c[0] == 0 && c[1] == 0 && c[2] == 0 && (c[3] == 0 || c[3] == 255)) continue
 			  let j = c.join('|')
 			  if (matches[j] == undefined) {
-				  matches[j] = tptcolors[avgclr.indexOf(closest(avgclr, rgbaaverage(...c)))]
+				  matches[j] = avgclr.indexOf(closest(avgclr, rgbaaverage(...c)))
 			  }
 			  c = matches[j] ?? c
-			  script.push(`tpt.fillrect(${x}, ${y}, 1, 1, ${c[0]}, ${c[1]}, ${c[2]}, ${c[3]})`)
+			  script.push(`sim.partCreate(-3, ${x}, ${y}, ${c})`)
 		  }
 		  script.push('print('+y+')')
 	  }
