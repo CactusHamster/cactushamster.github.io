@@ -5,6 +5,12 @@ let ctx = canvas.getContext('2d')
 let ctxImage = new Image()
 
 let sizeControlSize = 12
+let renderButtons = true
+
+let simSize = {
+  w: (612),
+  h: (384)
+}
 
 HTMLCanvasElement.prototype.getMousePosition = function (event) {
   let rect = this.getBoundingClientRect();
@@ -48,9 +54,9 @@ imageInput.addEventListener('change', function (e) {
     ctxImage.src = this.result
     ctxImage.onload = function () {
       if (this.width > canvas.width || this.height > canvas.height) {
-        let xy = calculateAspectRatioFit(this.width, this.height, canvas.width, canvas.height)
-        this.width = xy.width
-        this.height = xy.height
+        let xy = calculateAspectRatioFit(this.width, this.height, simSize.w-8, simSize.h-8)
+        ctxImage.width = xy.width
+        ctxImage.height = xy.height
       }
       render()
       //imageX = 0
@@ -61,10 +67,7 @@ imageInput.addEventListener('change', function (e) {
 
 
 
-let simSize = {
-  w: (612),
-  h: (384)
-}
+
 
 function render () {
   ctx.fillStyle = 'white'
@@ -73,23 +76,25 @@ function render () {
   ctx.fillStyle = 'black'
   ctx.fillRect((canvas.width/2)-((simSize.w/2)+4), ((canvas.height/2)-(simSize.h/2)+4), simSize.w-4, simSize.h-4)
 
+	if (renderButtons) {
   ctx.fillStyle = 'purple'
   ctx.fillRect(imageX - sizeControlSize, imageY  + ctxImage.height, ctxImage.width + (sizeControlSize*2), (sizeControlSize))
   ctx.fillRect(imageX-sizeControlSize, imageY, ctxImage.width + (sizeControlSize*2), -sizeControlSize)
-
+	}
 
   ctx.drawImage(ctxImage, imageX, imageY, ctxImage.width, ctxImage.height);
 
-  ctx.fillStyle = 'red'
-  ctx.fillRect(ctxImage.width+imageX-1, imageY, sizeControlSize, ctxImage.height)
-  ctx.fillStyle = 'red'
-  ctx.fillRect(imageX+1, imageY, -sizeControlSize, ctxImage.height)
+	if (renderButtons) {
+		ctx.fillStyle = 'red'
+		ctx.fillRect(ctxImage.width+imageX-1, imageY, sizeControlSize, ctxImage.height)
+		ctx.fillStyle = 'red'
+		ctx.fillRect(imageX+1, imageY, -sizeControlSize, ctxImage.height)
 
-  ctx.fillStyle = 'green'
-  ctx.fillRect(imageX, imageY+1, ctxImage.width, -sizeControlSize)
-  ctx.fillStyle = 'green'
-  ctx.fillRect(imageX, ctxImage.height+imageY-1, ctxImage.width, sizeControlSize)
-
+		ctx.fillStyle = 'green'
+		ctx.fillRect(imageX, imageY+1, ctxImage.width, -sizeControlSize)
+		ctx.fillStyle = 'green'
+		ctx.fillRect(imageX, ctxImage.height+imageY-1, ctxImage.width, sizeControlSize)
+	}
 }
 
 
@@ -97,7 +102,7 @@ let canvasMouseDown = false
 let imageHeld = false
 let lastMouseCoords = {x: 0, y: 0}
 
-let buttonsHeld = []
+let buttonsHeld = {}
 
 canvas.onmousedown = function (e) {
   let mc = canvas.getMousePosition(e)
@@ -109,17 +114,22 @@ canvas.onmousedown = function (e) {
   if (mc.x > ctxImage.width+imageX && mc.y > imageY - sizeControlSize && mc.x <  ctxImage.width+imageX+sizeControlSize && mc.y < ctxImage.height + imageY + sizeControlSize) {
     buttonsHeld['widthR'] = mc.x
   }
-  if (mc.x < imageX && mc.y > imageY - sizeControlSize && mc.x < imageX + ctxImage.width-sizeControlSize && mc.y < ctxImage.height + imageY + sizeControlSize) {
+  if (mc.x < imageX && mc.y > imageY - sizeControlSize && mc.x > imageX - sizeControlSize && mc.y < ctxImage.height + imageY + sizeControlSize) {
     buttonsHeld['widthL'] = [mc.x, imageX, ctxImage.width]
   }
 
   if (mc.x > imageX - sizeControlSize && mc.y < imageY && mc.x < imageX + sizeControlSize + ctxImage.width  && mc.y > imageY-sizeControlSize) {
     buttonsHeld['heightDown'] = [mc.y, imageY, ctxImage.height]
-    console.info('h')
   }
   if (mc.y > imageY + ctxImage.height && mc.y < ctxImage.height + sizeControlSize + imageY && mc.x > imageX - sizeControlSize && mc.x < imageX + ctxImage.width + sizeControlSize) {
     buttonsHeld['heightUp'] = mc.x
   }
+
+ if (!Object.keys(buttonsHeld)[0]) {
+	 renderButtons = false
+ } else {
+	renderButtons = true 
+ }
 
   render()
 }
@@ -158,6 +168,10 @@ canvas.onmousemove = function (e) {
 }
 
 
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
 
 
 
