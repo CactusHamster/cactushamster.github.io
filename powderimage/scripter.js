@@ -76,7 +76,9 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 	genimage.src = canvas.toDataURL()
 	genimage.onload = () => {
 		//let script = ['']
-		let script = ['function image ()', 'local a = 0'];
+		let functionName = filenameInput.value.toString().trim()
+		if (functionName == '') functionName = 'image'
+		let script = [`--print("Use ${functionName}() to draw your image!")`, `function ${functionName} ()`, `local a = 0`];
 
 		let xf = Math.floor( ( (canvas.width / 2) ) - ( (simSize.w / 2) ) + 4 )
 		let yf = Math.floor( ( (canvas.height / 2) ) - ( (simSize.h / 2) ) + 4 )
@@ -109,7 +111,10 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				if (c == 154) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_LIFE, 0)`)
 				//Set CLST tmp to 5
 				else if (c == 155) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_TMP, 5)`)
+				//Change TRON to lime green-ish
 				else if (c == 143) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_TMP, 12000)`)
+				//Change SPRK to have a ctype of TUNG
+				else if (c == 15) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, 171)\nsim.partProperty(a, sim.FIELD_CTYPE, 171)\nsim.partProperty(a, sim.FIELD_LIFE, 10)\nsim.partProperty(a, sim.FIELD_TYPE, 15)`)
 				else script.push(`sim.partCreate(-3, ${x}, ${offsettedY}, ${c})`)
 				
 				
@@ -124,7 +129,10 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 			script.push(`-- y = ${y}`)
 		}
 		script.push('end')
-		download(((imageInput.files[0] ?? {}).name ?? 'img') + '.lua', script.join('\n'))
+		let title = filenameInput.value.toString().trim()
+		if (title == '.lua') title = ((imageInput.files[0] ?? {}).name ?? 'img')
+		if (!title.endsWith('.lua')) title = title + '.lua'
+		download(title, script.join('\n'))
 		render()
 	};
 }

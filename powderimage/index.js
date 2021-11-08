@@ -54,20 +54,26 @@ imageInput.addEventListener('change', function (e) {
   uploadFileText.innerHTML = `Upload File (${this.files[0].name})`
   rd.readAsDataURL(file);
   rd.addEventListener('load', function () {
+	ctxImage = undefined;
+	ctxImage = new Image()
     ctxImage.src = this.result
+	ctxImage.onerror = ctxImageonerror
+	ctxImage.onload = ctxImageonload
   })
 })
 
 imageurlInput.addEventListener('change', function (e) {
 	if (!(this.value != '' && this.value.startsWith('https').toString/* && /\.(png|jpg|svg|gif)$/.test(this.value.toString())*/)) return
+	ctxImage = undefined;
+	ctxImage = new Image()
 	ctxImage.src = this.value
 })
 
-ctxImage.onerror = function () {
+let ctxImageonerror = function () {
 	alert('Invalid Image!')
 }
 
-ctxImage.onload = function () {
+let ctxImageonload = function () {
   if (this.width > simSize.w || this.height > simSize.h) {
     let xy = calculateAspectRatioFit(this.width, this.height, simSize.w, simSize.h)
     ctxImage.width = xy.width
@@ -190,6 +196,7 @@ function componentToHex(c) {
 
 
 let leftResizeModifier = 0.3
+/*
 window.addEventListener('resize', function resizeCanvas() {
   imageX = prop(imageX, 0, window.innerWidth - (window.innerWidth * leftResizeModifier), 0, canvas.width,)
   imageY = prop(imageY, 0, window.innerHeight, 0, canvas.height,)
@@ -198,6 +205,7 @@ window.addEventListener('resize', function resizeCanvas() {
   controlsDiv.style.width = window.innerWidth * leftResizeModifier
   render()
 }, false);
+*/
 canvas.width = window.innerWidth - (window.innerWidth * leftResizeModifier);
 canvas.height = window.innerHeight;
 controlsDiv.style.width = window.innerWidth * leftResizeModifier
