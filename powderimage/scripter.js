@@ -4,12 +4,6 @@ gpu.addFunction(prop)
 let newcanva = document.createElement('CANVAS')
 let genctx = newcanva.getContext('2d')
 
-function closest (arr, goal) {
-	var ret = arr.reduce(function(prev, curr) {
-		return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-	});
-	return ret
-}
 
 
 
@@ -32,50 +26,38 @@ let colors = tptcolors.map((val) => {return getColor(val);});
 function dist(x,y,z,x2,y2,z2) {
 	return Math.hypot(x-x2,y-y2,z-z2);
 }
-
 function getClosest(r,g,b) {
 	//returns the index of closest elem to rgb value
-
 	let minDist = Infinity;
 	let minI = 0;
-
 	colors.forEach((item,i) => {
 		let d = dist(...item,r,g,b);
 		if (d<minDist) {minI = i;minDist = d;}
 	});
-
 	return minI;
 }
 
-//...
 
-
-
-function rgbaverage (r, g, b) {
-	return (r + g + b);// / 3
-}
 
 
 const genimage = new Image()
+
+
+
+//Get color pixels from the image
 const getColors = gpu.createKernel(function(img, xoffset, yoffset) {
-		let x = this.thread.x
-		let y = this.thread.y
 		const c = img[this.thread.y + yoffset][this.thread.x + xoffset];
-		
 		c[0] = c[0] * 255
 		c[1] = c[1] * 255
-		c[2] = c[2] * 255
-		c[3] = c[3] * 255
-		
-		//this.color(c[0], c[1], c[2], c[3]);
-		return c
+		c[2] = c[2] * 255		//this.color(c[0], c[1], c[2], c[3]);
+		return [c[0], c[1], c[2]]
 })
 .setOutput([simSize.w - 8, simSize.h - 8])
 
 
 function generateScript() {
 	if (!ctxImage.src) return alert('You need to add an image!');
-	let debugLog = []
+
 	ctx.fillStyle = 'white'
 	ctx.fillRect(0, 0, canvas.width, canvas.height)
 	ctx.fillStyle = 'black'
@@ -83,19 +65,20 @@ function generateScript() {
 
 	ctx.drawImage(ctxImage, imageX, imageY, ctxImage.width, ctxImage.height);
 
+
 	genimage.src = canvas.toDataURL()
 	genimage.onload = () => {
 		//let script = ['']
 		let script = ['function image ()'];
 		let colors = getColors(genimage, (canvas.width / 2) - ((simSize.w / 2) + 4), ((canvas.height / 2) - (simSize.h / 2) + 4));
 		let matches = {}; //Stores matched colors to their elements for speed
-		
-	
-	  
+
+
+
 	  for (y in colors) {
 		  for (x in colors) {
 			let c = colors[y][x]
-			  
+
 			if (c[0] == 0 && c[1] == 0 && c[2] == 0 && (c[3] == 0 || c[3] == 255)) {
 				continue;
 			}
@@ -116,7 +99,7 @@ function generateScript() {
 	  }
 	  //console.info(matches)
 	  script.push('end')
-	  
+
 		download('program.lua', script.join('\n'))
 		//download('debug.log', debugLog.join('\n'))
 	};
