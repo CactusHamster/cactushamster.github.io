@@ -49,6 +49,7 @@ imageInput.addEventListener('change', function (e) {
   let file = e.target.files[0]
   if (!file) return
   let rd = new FileReader()
+  uploadFileText.innerHTML = `Upload File (${this.files[0].name})`
   rd.readAsDataURL(file);
   rd.addEventListener('load', function () {
     ctxImage.src = this.result
@@ -56,11 +57,15 @@ imageInput.addEventListener('change', function (e) {
 })
 
 ctxImage.onload = function () {
-  if (this.width > canvas.width || this.height > canvas.height) {
+  if (this.width > simSize.w || this.height > simSize.h) {
     let xy = calculateAspectRatioFit(this.width, this.height, simSize.w, simSize.h)
     ctxImage.width = xy.width
     ctxImage.height = xy.height
   }
+	ctxImage.width = ctxImage.width
+	ctxImage.height = ctxImage.height
+	imageX = (canvas.width / 2) - (ctxImage.width / 2)
+	imageY = ((canvas.height / 2) + (simSize.h / 2)) - ctxImage.height
   render()
 }
 
@@ -173,15 +178,17 @@ function componentToHex(c) {
 
 
 
-
+let leftResizeModifier = 0.3
 window.addEventListener('resize', function resizeCanvas() {
-  imageX = prop(imageX, 0, window.innerWidth, 0, canvas.width,)
-  imageY = prop(imageY, 0, window.innerHeight-100, 0, canvas.height,)
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight-100;
+  imageX = prop(imageX, 0, window.innerWidth - (window.innerWidth * leftResizeModifier), 0, canvas.width,)
+  imageY = prop(imageY, 0, window.innerHeight, 0, canvas.height,)
+  canvas.width = window.innerWidth - (window.innerWidth * leftResizeModifier);
+  canvas.height = window.innerHeight;
+  controlsDiv.style.width = window.innerWidth * leftResizeModifier
   render()
 }, false);
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight-100;
+canvas.width = window.innerWidth - (window.innerWidth * leftResizeModifier);
+canvas.height = window.innerHeight;
+controlsDiv.style.width = window.innerWidth * leftResizeModifier
 render()
 //setInterval(render, 50)

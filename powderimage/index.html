@@ -1,28 +1,48 @@
 <head>
-
-<meta charset="utf-8">
-
-
+	<title>PowderToy Image Converter</title>
+	<link rel="stylesheet" type="text/css" href="index.css" />
+	<meta charset="utf-8">
 </head>
-<style>
-  * { margin:0; padding:0; } /* to remove the top and left whitespace */
-  html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
-  canvas { display:block; flex-basis: 50%;} /* To remove the scrollbars */
-</style>
+
 <body>
-  <canvas width=500 height=500 <!--style="position: absolute;"-->></canvas>
-  <!--<textarea name="canvasResize" rows="8" cols="80"></textarea>-->
-  <br></br>
-  <input type="file" accept="image/*" id="loadImageInput"></input>
-  <input type="range" min=0 max=30 id="sizeControlSizeSlider" value=12></input>
-  <br></br>
-  <input type="button" value="Create Script" onclick="generateScript()"></input>
+	<div>
+		<canvas style="float:left; display:inline-block" width="500" height="500"></canvas>
 
+		<div class="controls" style="display:inline-block" id="controlsDiv">
+			<label class="fileControlButton" style="display:inline-block;">
+				<p id="uploadFileText">Upload File</p>
+				<input type="file" style="display:none;" accept="image/*" id="loadImageInput">
+			</label>
+			<br>
+			<br>
+			<input type="button" class="ctrlLabel noDispButton" value="Control Size"></input>
+			<input style="margin-left: 5px" class="slider" type="range" min="0" max="30" id="sizeControlSizeSlider" value="12">
+			<br>
+			<br>
+			<div style="white-space: nowrap; display:inline-block">
+				<input value="Deco" class="ctrlLabel noDispButton" style="display:inline-block;" type="button"></input>
+				<input type="checkbox" id="DecoSwitch" class="checkbox" />
+				<label style="text-align:center;" for="DecoSwitch" class="toggle">
+					<p style="text-align:center;" class="noSelect switchtxt">&nbsp;&emsp;On&emsp;&emsp;&nbsp;Off</p>
+				</label>
+			</div>
+			
+			<div style="white-space: nowrap; display:inline-block">
+				<input value="Powders" class="ctrlLabel noDispButton" style="display:inline-block;" type="button"></input>
+				<input type="checkbox" id="PowderSwitch" class="checkbox" />
+				<label style="text-align:center;" for="PowderSwitch" class="toggle">
+					<p style="text-align:center;" class="noSelect switchtxt">&nbsp;&emsp;On&emsp;&emsp;&nbsp;Off</p>
+				</label>
+			</div>
+			
+			
+			<br>
+			<br>
+			<br>
+			<input type="button" class="fileControlButton" value="Create Script" onclick="generateScript(!!DecoSwitch.checked, !!PowderSwitch.checked)">
+		</div>
+	</div>
+	<script src='./gpu-browser.min.js'></script>
+	<script src="index.js"></script>
+	<script src="scripter.js"></script>
 </body>
-
-<!--<script src="https://raw.githubusercontent.com/gpujs/gpu.js/master/dist/gpu-browser.min.js"></script>-->
-
-<script src='./gpu-browser.min.js'></script>
-
-<script src="index.js"></script>
-<script src="scripter.js"></script>
