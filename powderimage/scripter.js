@@ -109,10 +109,11 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				if (c == 154) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_LIFE, 0)`)
 				//Set CLST tmp to 5
 				else if (c == 155) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_TMP, 5)`)
+				else if (c == 143) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_TMP, 12000)`)
 				else script.push(`sim.partCreate(-3, ${x}, ${offsettedY}, ${c})`)
 				
 				
-				if (deco && (c != 54)) {
+				if (deco/* && (c != 54)*/) {
 					if (useAlpha) {
 						script.push(`sim.decoBox(${x}, ${offsettedY}, ${x}, ${offsettedY}, ${cc[0]}, ${cc[1]}, ${cc[2]}, ${cc[3]})`)
 					} else {
@@ -123,7 +124,7 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 			script.push(`-- y = ${y}`)
 		}
 		script.push('end')
-		download('program.lua', script.join('\n'))
+		download(((imageInput.files[0] ?? {}).name ?? 'img') + '.lua', script.join('\n'))
 		render()
 	};
 }

@@ -3,6 +3,8 @@ let imageInput = document.getElementById('loadImageInput')
 let canvas = document.getElementsByTagName('canvas')[0]
 let ctx = canvas.getContext('2d')
 let ctxImage = new Image()
+ctxImage.crossOrigin = ''
+ctxImage.crossOrigin = "anonymous";
 
 let sizeControlSize = 12
 let renderButtons = true
@@ -55,6 +57,15 @@ imageInput.addEventListener('change', function (e) {
     ctxImage.src = this.result
   })
 })
+
+imageurlInput.addEventListener('change', function (e) {
+	if (!(this.value != '' && this.value.startsWith('https').toString/* && /\.(png|jpg|svg|gif)$/.test(this.value.toString())*/)) return
+	ctxImage.src = this.value
+})
+
+ctxImage.onerror = function () {
+	alert('Invalid Image!')
+}
 
 ctxImage.onload = function () {
   if (this.width > simSize.w || this.height > simSize.h) {
