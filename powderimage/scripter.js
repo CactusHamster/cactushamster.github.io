@@ -59,8 +59,8 @@ const getColors = gpu.createKernel(function(img, xoffset, yoffset) {
 		return c
 	})
 	.setOutput({
-		x: simSize.w,
-		y: simSize.h
+		x: simSize.w - 8,
+		y: simSize.h - 8
 	})
 
 
@@ -78,8 +78,8 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 		//let script = ['']
 		let script = ['function image ()', 'local a = 0'];
 
-		let xf = Math.floor((canvas.width / 2) - (simSize.w / 2))
-		let yf = Math.floor((canvas.height / 2) - (simSize.h / 2))
+		let xf = Math.floor( ( (canvas.width / 2) ) - ( (simSize.w / 2) ) + 4 )
+		let yf = Math.floor( ( (canvas.height / 2) ) - ( (simSize.h / 2) ) + 4 )
 		let colors = getColors(genimage, xf, yf);
 		let matches = {}; //Stores matched colors to their elements for speed
 
@@ -92,7 +92,7 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				if (!useFill && c[0] + c[1] + c[2] + c[3] == 0) continue;
 				if (!fillBlack && c[3] == 255 && c[0] + c[1] + c[2] == 0) continue;
 				
-				let offsettedY = -y + (simSize.h)
+				let offsettedY = -y + (simSize.h - 4)
 				if (elems) {
 					let j = c.join('|')
 					if (matches[j] == undefined) { //Checks if there is an already created key
