@@ -34,6 +34,8 @@ function download(filename, text) {
 	document.body.removeChild(element);
 }
 
+
+
 function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
 	var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
 	//console.info(srcWidth, srcHeight, maxWidth, maxHeight, ratio)

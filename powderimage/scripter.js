@@ -76,7 +76,7 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 	genimage.src = canvas.toDataURL()
 	genimage.onload = () => {
 		//let script = ['']
-		let functionName = filenameInput.value.toString().trim()
+		let functionName = functionnameInput.value.toString().trim()
 		if (functionName == '') functionName = 'image'
 		let script = [`--print("Use ${functionName}() to draw your image!")`, `function ${functionName} ()`, `local a = 0`];
 
@@ -107,6 +107,8 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				else {
 					c = defaultElem
 				}
+				//LCRY to BLGA
+				if (c == 54) c = 47
 				//Set GPMP life to 0
 				if (c == 154) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_LIFE, 0)`)
 				//Set CLST tmp to 5
@@ -116,7 +118,6 @@ function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 				//Change SPRK to have a ctype of TUNG
 				else if (c == 15) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, 171)\nsim.partProperty(a, sim.FIELD_CTYPE, 171)\nsim.partProperty(a, sim.FIELD_LIFE, 10)\nsim.partProperty(a, sim.FIELD_TYPE, 15)`)
 				else script.push(`sim.partCreate(-3, ${x}, ${offsettedY}, ${c})`)
-				
 				
 				if (deco/* && (c != 54)*/) {
 					if (useAlpha) {
