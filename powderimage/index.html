@@ -1,6 +1,7 @@
 <head>
 	<title>PowderToy Image Converter</title>
 	<link rel="stylesheet" type="text/css" href="index.css" />
+	<link rel="stylesheet" type="text/css" href="checkboxes.css" />
 	<meta charset="utf-8">
 </head>
 
@@ -35,11 +36,28 @@
 				</label>
 			</div>
 			
+			<br>
+			<br>
+			
+			<label style="margin-left: 4px" class="container">Fill in blank spaces
+				<input type="checkbox" id='usewarp'>
+				<span class="checkmark"></span>
+			</label>
+			
+			<label style="margin-left: 4px" class="container">Fill in black spaces
+				<input type="checkbox" id="useblack" checked="checked">
+				<span class="checkmark"></span>
+			</label>
+			
+			<label style="margin-left: 4px" class="container">Use Alpha transparency
+				<input type="checkbox" id="usealpha" checked="checked">
+				<span class="checkmark"></span>
+			</label>
 			
 			<br>
 			<br>
 			<br>
-			<input type="button" class="fileControlButton" value="Create Script" onclick="generateScript(!!DecoSwitch.checked, !!PowderSwitch.checked)">
+			<input type="button" class="fileControlButton" value="Create Script" onclick="generateScript(!!DecoSwitch.checked, !!PowderSwitch.checked, !!usewarp.checked, !!usealpha.checked, !!useblack.checked)">
 		</div>
 	</div>
 	<script src='./gpu-browser.min.js'></script>

@@ -55,7 +55,8 @@ const getColors = gpu.createKernel(function(img, xoffset, yoffset) {
 		c[0] = c[0] * 255
 		c[1] = c[1] * 255
 		c[2] = c[2] * 255 //this.color(c[0], c[1], c[2], c[3]);
-		return [c[0], c[1], c[2]]
+		c[3] = c[3] * 255
+		return c
 	})
 	.setOutput({
 		x: simSize.w,
@@ -63,9 +64,9 @@ const getColors = gpu.createKernel(function(img, xoffset, yoffset) {
 	})
 
 
-function generateScript(deco, elems) {
+function generateScript(deco, elems, useFill, useAlpha, fillBlack) {
 	if (!ctxImage.src) return alert('You need to add an image!');
-	console.info(deco, elems)
+	let defaultElem = 67
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
 	//ctx.fillStyle = 'black'
 	//ctx.fillRect((canvas.width / 2) - ((simSize.w / 2)), ((canvas.height / 2) - (simSize.h / 2)), simSize.w, simSize.h)
@@ -75,7 +76,7 @@ function generateScript(deco, elems) {
 	genimage.src = canvas.toDataURL()
 	genimage.onload = () => {
 		//let script = ['']
-		let script = ['function image ()'];
+		let script = ['function image ()', 'local a = 0'];
 
 		let xf = Math.floor((canvas.width / 2) - (simSize.w / 2))
 		let yf = Math.floor((canvas.height / 2) - (simSize.h / 2))
@@ -85,22 +86,44 @@ function generateScript(deco, elems) {
 
 		for (y in colors) {
 			for (x in colors[y]) {
-
+				
 				let c = colors[y][x]
-				if (c[0] == 0 && c[1] == 0 && c[2] == 0 && (c[3] == 0 || c[3] == 255)) {
-					continue;
+				let cc = c
+				if (!useFill && c[0] + c[1] + c[2] + c[3] == 0) continue;
+				if (!fillBlack && c[3] == 255 && c[0] + c[1] + c[2] == 0) continue;
+				
+				let offsettedY = -y + (simSize.h)
+				if (elems) {
+					let j = c.join('|')
+					if (matches[j] == undefined) { //Checks if there is an already created key
+						let u = getClosest(...c) //Sets u to the closest colored tpt element index
+						matches[j] = u
+					}
+					c = matches[j] ?? c
+					if (c == 4) c = 89 //Fire bad, dest good
 				}
-				let j = c.join('|')
-				if (matches[j] == undefined) { //Checks if there is an already created key
-					let u = getClosest(...c) //Sets u to the closest colored tpt element index
-					matches[j] = u
+				else {
+					c = defaultElem
 				}
-				c = matches[j] ?? c
-				script.push(`sim.partCreate(-3, ${x}, ${-y + (simSize.h)}, ${c})`)
+				//Set GPMP life to 0
+				if (c == 154) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_LIFE, 0)`)
+				//Set CLST tmp to 5
+				else if (c == 155) script.push(`a = sim.partCreate(-3, ${x}, ${offsettedY}, ${c})\nsim.partProperty(a, sim.FIELD_TMP, 5)`)
+				else script.push(`sim.partCreate(-3, ${x}, ${offsettedY}, ${c})`)
+				
+				
+				if (deco && (c != 54)) {
+					if (useAlpha) {
+						script.push(`sim.decoBox(${x}, ${offsettedY}, ${x}, ${offsettedY}, ${cc[0]}, ${cc[1]}, ${cc[2]}, ${cc[3]})`)
+					} else {
+						script.push(`sim.decoBox(${x}, ${offsettedY}, ${x}, ${offsettedY}, ${cc[0]}, ${cc[1]}, ${cc[2]})`)
+					}
+				}
 			}
 			script.push(`-- y = ${y}`)
 		}
 		script.push('end')
 		download('program.lua', script.join('\n'))
+		render()
 	};
 }
