@@ -57,7 +57,7 @@ imageInput.addEventListener('change', function (e) {
 
 ctxImage.onload = function () {
   if (this.width > canvas.width || this.height > canvas.height) {
-    let xy = calculateAspectRatioFit(this.width, this.height, simSize.w-8, simSize.h-8)
+    let xy = calculateAspectRatioFit(this.width, this.height, simSize.w, simSize.h)
     ctxImage.width = xy.width
     ctxImage.height = xy.height
   }
@@ -71,7 +71,7 @@ function render () {
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   ctx.fillStyle = 'black'
-  ctx.fillRect((canvas.width/2)-((simSize.w/2)+4), ((canvas.height/2)-(simSize.h/2)+4), simSize.w-4, simSize.h-4)
+  ctx.fillRect((canvas.width/2)-((simSize.w/2)), ((canvas.height/2)-(simSize.h/2)), simSize.w, simSize.h)
 
 	if (renderButtons) {
   ctx.fillStyle = 'purple'

@@ -52,17 +52,15 @@ const getColors = gpu.createKernel(function(img, xoffset, yoffset) {
 		c[2] = c[2] * 255		//this.color(c[0], c[1], c[2], c[3]);
 		return [c[0], c[1], c[2]]
 })
-.setOutput([simSize.w - 8, simSize.h - 8])
+.setOutput({x: simSize.w, y: simSize.h})
 
 
 function generateScript() {
 	if (!ctxImage.src) return alert('You need to add an image!');
 
-	ctx.fillStyle = 'white'
-	ctx.fillRect(0, 0, canvas.width, canvas.height)
-	ctx.fillStyle = 'black'
-	ctx.fillRect((canvas.width / 2) - ((simSize.w / 2) + 4), ((canvas.height / 2) - (simSize.h / 2) + 4), simSize.w - 4, simSize.h - 4)
-
+	ctx.clearRect(0, 0, canvas.width, canvas.height)
+	//ctx.fillStyle = 'black'
+	//ctx.fillRect((canvas.width / 2) - ((simSize.w / 2)), ((canvas.height / 2) - (simSize.h / 2)), simSize.w, simSize.h)
 	ctx.drawImage(ctxImage, imageX, imageY, ctxImage.width, ctxImage.height);
 
 
@@ -70,37 +68,30 @@ function generateScript() {
 	genimage.onload = () => {
 		//let script = ['']
 		let script = ['function image ()'];
-		let colors = getColors(genimage, (canvas.width / 2) - ((simSize.w / 2) + 4), ((canvas.height / 2) - (simSize.h / 2) + 4));
+		
+		let xf = Math.floor((canvas.width / 2) - (simSize.w / 2))
+		let yf = Math.floor((canvas.height / 2) - (simSize.h / 2))
+		let colors = getColors( genimage, xf, yf );
 		let matches = {}; //Stores matched colors to their elements for speed
 
 
-
 	  for (y in colors) {
-		  for (x in colors) {
+		  for (x in colors[y]) {
 			let c = colors[y][x]
-
 			if (c[0] == 0 && c[1] == 0 && c[2] == 0 && (c[3] == 0 || c[3] == 255)) {
 				continue;
 			}
-
-
 			let j = c.join('|')
 			if (matches[j] == undefined) { //Checks if there is an already created key
 				let u = getClosest(...c) //Sets u to the closest colored tpt element index
 				matches[j] = u
 			}
-
-
-
 			c = matches[j] ?? c
-			script.push(`sim.partCreate(-3, ${x}, ${-y + (simSize.h-4)}, ${c})`)
+			script.push(`sim.partCreate(-3, ${x}, ${-y + (simSize.h)}, ${c})`)
 		}
 		script.push(`-- y = ${y}`)
 	  }
-	  //console.info(matches)
 	  script.push('end')
-
 		download('program.lua', script.join('\n'))
-		//download('debug.log', debugLog.join('\n'))
 	};
 }
