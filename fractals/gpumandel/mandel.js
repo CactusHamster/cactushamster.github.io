@@ -154,7 +154,7 @@ function color1 (i) { //For 255 iteration mandelbrot
 	if (i < 85) r = i * 3
 	else if (i < 171) g = 3 * (i - 84)
 	else b = 3 * (i - 170);
-	return [r, g, b]
+	return [r/255, g/255, b/255]
 }
 
 
