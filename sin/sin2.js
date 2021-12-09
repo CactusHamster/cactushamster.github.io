@@ -40,8 +40,6 @@ function render () {
 		ctx.fillStyle = clr
 		ctx.fillRect(x, 0, 1, h)	
 	}
-	console.log(b)
-	
 }
 
 
