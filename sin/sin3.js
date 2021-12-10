@@ -13,7 +13,7 @@ Array.from(document.getElementsByClassName('freq')).map(freqS => {
 	freqS.value = 2*canvas.width;
 })
 Array.from(document.getElementsByClassName('phas')).map(phasS => {
-	phasS.max = 20; phasS.step = 0; phasS.value = 0
+	phasS.max = 20; phasS.step = 0.1; phasS.value = 0
 })
 cSlr.max = 255; cSlr.value = Math.floor(255/2); cSlr.min = 0
 wSlr.max = 255; wSlr.value = Math.floor(255/2); wSlr.min = 0
