@@ -29,13 +29,13 @@ function newSin(i) {
 let xx = [-2, 2]
 let yy = [-2, 2]
 let frame = 0
-let fskip = 0.2
+let fskip = 1
 function render () {
 	frame = frame + fskip
 	c = [-0.8 + 0.6 * Math.sin(frame / (3.14 * 20)), 0.156 + 0.4 * Math.cos(frame / (3.14 * 40))];
 	julia(xx, yy, c, julia.canvas.width, julia.canvas.height);
 }
-setInterval(render, 1)
+let rendInt = setInterval(render, 50)
 function translate (x=0, y=0) {
 	if (x != 0) {
 		var unit = (Math.abs(xx[1] - xx[0])) * (1/10)
@@ -60,4 +60,9 @@ function zoom (percent) {
 	xx[0] = xx[0] + (width * percent)
 	xx[1] = xx[1] - (width * percent)
 	console.info(...xx, ...yy)
+}
+
+function changeSpeed (ms) {
+	clearInterval(rendInt)
+	let rendInt = setInterval(render, ms)
 }
