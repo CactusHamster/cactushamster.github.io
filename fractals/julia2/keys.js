@@ -1,4 +1,6 @@
 document.addEventListener('keypress', function (e) {
+	console.log(e.key)
+	e.preventDefault()
 	switch (e.key) {
 	case "d":
 		translate(0.1, 0)
@@ -17,6 +19,23 @@ document.addEventListener('keypress', function (e) {
 		break;
 	case "-":
 		zoom(-4)
+		break;
+	case " ":
+		togglePause()
+		break;
+	case ".":
+		updateIterate(1)
+		break;
+	case ",":
+		updateIterate(-1)
+		break;
+	case "q":
+		frame = frame - fskip
+		render()
+		break;
+	case "e":
+		frame = frame + fskip
+		render()
 		break;
 	}
 })
