@@ -12,13 +12,15 @@ let xx = [-1.25 * (w/h), 1.25 * (w/h)]
 canvas.width = w
 canvas.height = h
 const gpu = new GPU({canvas: canvas});
-let julia = gpu.createKernel(function(xx, yy, c, width, height, iterations) {
+let julia = gpu.createKernel(function(xx, yy, c, width, height, iterations, d) {
 	let x = (this.thread.x / width) * (xx[1] - xx[0]) + xx[0]
 	let y = (this.thread.y / height) * (yy[1] - yy[0]) + yy[0]
-	for (var i = 0; (x*x+y*y<4 && i < iterations); i++) {
+	var i = 0;
+	while (x * x + y * y < d && i < iterations) {
 		let xt = x * x - y * y + c[0];
 		y = 2.0 * x * y + c[1];
 		x = xt;
+		i = i + 1;
 	}
 	let a = ((i-1.0) / (iterations-1))
 	this.color(0.0, a, 0.0)
@@ -26,6 +28,10 @@ let julia = gpu.createKernel(function(xx, yy, c, width, height, iterations) {
 .setOutput([canvas.width, canvas.height])
 .setGraphical(true)
 .setDynamicOutput(true)
+.setFixIntegerDivisionAccuracy(true)
+//.setPrecision('unsigned')
+.setTactic('precision')
+
 window.addEventListener('resize', function () {
 	//yy[0] = yy[0]
 	//yy[1] = yy[1]
@@ -50,8 +56,12 @@ function newSin(i) {
 	return d
 }
 function render () {
-	c = [-0.8 + 0.6 * Math.sin(frame / (Math.PI * 20)), 0.156 + 0.4 * Math.cos(frame / (Math.PI * 40))];
-	julia(xx, yy, c, julia.canvas.width, julia.canvas.height, ITERATIONS);
+	let d = 6
+	let c = [
+		-0.8 + 0.6 * Math.sin(frame / (Math.PI * 20)),
+		0.156 + 0.4 * Math.cos(frame / (Math.PI * 40))
+	];
+	julia(xx, yy, c, julia.canvas.width, julia.canvas.height, ITERATIONS, d);
 }
 function translate (x=0, y=0) {
 	if (x != 0) {
