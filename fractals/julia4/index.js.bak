@@ -15,9 +15,9 @@ let yy = [-1.5, 1.5]
 let xx = [-1.5 * (w/h), 1.5 * (w/h)]
 canvas.width = w; canvas.height = h
 const gpu = new GPU({canvas: canvas});
-let julia = gpu.createKernel(function(xx, yy, a, c, width, height, iterations, radius) {
-	let x = (this.thread.x / width) * (xx[1] - xx[0]) + xx[0]
-	let y = (this.thread.y / height) * (yy[1] - yy[0]) + yy[0]
+let julia = gpu.createKernel(function(xx, yy, a, c, iterations, radius) {
+	let x = (this.thread.x / this.constants.width) * (xx[1] - xx[0]) + xx[0]
+	let y = (this.thread.y / this.constants.height) * (yy[1] - yy[0]) + yy[0]
 	var i = 0;
 	//let z = [0, 0]
 	while (x * x + y * y < radius && i < iterations) {
@@ -35,13 +35,14 @@ let julia = gpu.createKernel(function(xx, yy, a, c, width, height, iterations, r
 	let r=0, g=0, b=0;
 	//let colors = [0, 0, 0, 0, 72, 145, 119, 187, 255, 255, 255, 255, 255, 255, 0, 255, 128, 0, 0, 0, 0]
 
-	r=i2+50;b=r;g=r
+	r=i2;b=r;g=r
 	
 	this.color(r/255, g/255, b/255)
 	
 	//let colors = [[0, 0, 0], [0, 72, 145], [119, 187, 255], [255, 255, 255], [255, 255, 0], [255, 128, 0], [0, 0, 0]]
 }).setOutput([canvas.width, canvas.height])
 .setGraphical(true)
+.setConstants({h: canvas.height, w: canvas.width})
 .setFixIntegerDivisionAccuracy(true).setTactic('precision')
 
 
@@ -52,12 +53,12 @@ function fastSin (a, range) {
 function render () {
 	if (renderFunctionRunning) return false;
 	renderFunctionRunning = true
-	let d = 5
-	let a = prop(Math.cos(frame * 0.1), -1, 1, -Math.PI*0.5, Math.PI*0.5)
+	let d = 10
 	//let a = -0.8 + 0.6 * /*fastSin*/Math.sin(frame / (Math.PI * 20), 1)
 	//let c = 0.156 + 0.4 * Math.cos(frame / (Math.PI * 40))
-	let c = prop(Math.sin(frame * 0.1), -1, 1, -Math.PI*6, Math.PI*6)
-	julia(xx, yy, a, c, julia.canvas.width, julia.canvas.height, ITERATIONS, d) //|| togglePause()
+	let a = prop(Math.cos(frame * 0.1), -1, 1, -Math.PI*0.1, Math.PI*0.1)
+	let c = prop(Math.sin(frame * 0.1), -1, 1, -Math.PI*1, Math.PI*1)
+	julia(xx, yy, a, c, ITERATIONS, d) //|| togglePause()
 	//console.log(imagedataurl)
 	renderFunctionRunning = false
 	return true;
