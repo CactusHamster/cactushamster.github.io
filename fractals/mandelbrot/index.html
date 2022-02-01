@@ -1,0 +1,81 @@
+<head>
+	<meta charset="utf-8">
+	<title>mandelbrot</title>
+	<style>
+	canvas {
+		padding: 0px;
+		border: 0px;
+		margin: 0px;
+		position: absolute;
+	}
+	body {
+		padding: 0px;
+		margin: 0px;
+		background: black;
+	}
+	#iterationsDisplay {
+		position: absolute;
+		padding: 5px;
+		background: darkgray;
+		border-radius: 0px 0px 10px 0px;
+		opacity: 0;
+		left: 0px;
+		transition: 1s;
+		width: 40px;
+	}
+	#controlsHolder {
+		position: absolute;
+		background: gray;
+		right: 0px;
+		width: 25%;
+		height: 100%;
+		border: none;
+	}
+	#controlsHolder input {
+		width: 50%;
+		border-radius: 0px;
+		margin: 0px;
+		border: 1px inset black;
+		border-left: 0px solid grey;
+		border-right: 1px solid grey;
+	}
+	#controlsHolder .bu:hover {
+		background-color: #f5e9da;
+	}
+	#controlsHolder .bu:active {
+		background-color: #ebd1b2;
+	}
+	#controlsHolder .bu {
+		background-color: #d5f0dc;
+	}
+	#controlsHolder p {
+		width: 100%;
+		text-align: center;
+		margin-top: 4px;
+		margin-bottom: 4px;
+	}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+	<canvas></canvas>
+	<div style="">
+		<span id="iterationsDisplay" style="color: blue;">
+		Hello
+		</span>
+	</div>
+	<div id="controlsHolder">
+		<p>Fractal Options</p>
+		<input type="button" id="itChangeBut" class="bu" value="Change Iterations"></input><input type="number" step="5" value="255" min="0" id="itBox"></input>
+		<br>
+		<input type="button"id="escChangeBut" class="bu" value="Change Escape Radius"></input><input id="escBox" type="number" value="Infinity" step="1" min="0"></input>
+		<p>CPU Options</p>
+		<input type="button" id="cpuToggle" class="bu" style="position: relative; left: 25%" value="Use CPU"></input>
+		<input type="button" id="cpucSiToggle" class="bu" style="position: relative; left: 25%" value="full canvas"></input>
+		<input type="button" id="resChangeButton" class="bu" value="Change CPU Resolution"></input><input id="resBox" type="number" value="10" step="1" min="1"></input>
+	</div>
+</body>
+<script src="gpu.js"></script>
+<script src="index.js"></script>
+<script src="keys.js"></script>
+<script src="controls.js"></script>
