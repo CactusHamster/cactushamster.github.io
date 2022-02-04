@@ -1,0 +1,71 @@
+<head>
+	<title>mlem</title>
+	<meta charset="utf-8">
+	<style>
+	body {
+		margin: 0px;
+		padding: 0px;
+	}
+	canvas {
+		margin: 0px;
+		padding: 0px;
+	}
+	.controlsDiv {
+		text-align: left;
+		overflow: auto;
+		width: 50%;
+	}
+	.ctrl {
+	background-color: gray;
+	  width:100%;
+	  float:left;
+	  overflow:hidden;
+	  margin: none;
+	}
+	.s {
+		width:100%;
+		height: 6.25%;
+		-webkit-appearance: none;
+		background: #d3d3d3;
+	}
+	.s::-webkit-slider-thumb {
+	  -webkit-appearance: none;
+	  appearance: none;
+	  width: 15px;
+	  height: 15px;
+	  border-radius: 2%; 
+	  background: #1f1fff;
+	  cursor: pointer;
+	}
+	.s::-moz-range-thumb {
+	  width: 6%;
+	  height: 100%;
+	  border-radius: 2%;
+	  cursor: pointer;
+	}
+	ctrl p {
+		font-size: 10px;
+	}
+	</style>
+</head>
+
+<body style="text-align: center; padding: 0px; margin: 0px; overflow-right: hidden">
+	<canvas height="150" width="900" id="preview" style="margin: none; padding: none;"></canvas>
+	
+	<div style="height:50%;float:left;width:50%;padding: 0px; margin: 0px;" id="controlsDiv" class="controlsDiv">
+		<div class="ctrl"> <p onclick="p1.value = 0; render()" style="text-align: center">Phase R</p> <input class="s phas" type="range" id="p1"></input></div>
+		<div class="ctrl"> <p onclick="p2.value = 0; render()" style="text-align: center">Phase G</p> <input class="s phas" type="range" id="p2"></input></div>
+		<div class="ctrl"> <p onclick="p3.value = 0; render()" style="text-align: center">Phase B</p> <input class="s phas" type="range" id="p3"></input></div>
+		<div class="ctrl"> <p onclick="wSlr.value = 255/2; render()" style="text-align: center">Width</p> <input class="s" min="0" max="255" value="127.5" step="0.5" type="range" id="wSlr"></input></div>
+	</div>
+	<div style="height:50%;float:left;width:50%;padding: 0px; margin: 0px;" id="controlsDiv2" class="controlsDiv">
+		<div class="ctrl"> <p onclick="f1.value = 1; render()" style="text-align: center">Frequency R</p> <input class="s freq" type="range" id="f1"></input></div>
+		<div class="ctrl"> <p onclick="f2.value = 1; render()" style="text-align: center">Frequency G</p> <input class="s freq" type="range" id="f2"></input></div>
+		<div class="ctrl"> <p onclick="f3.value = 1; render()" style="text-align: center">Frequency B</p> <input class="s freq" type="range" id="f3"></input></div>
+		<div class="ctrl"> <p onclick="cSlr.value = 255/2; render()" style="text-align: center">Center</p> <input class="s" min="0" max="255" value="127.5" step="0.5" type="range" id="cSlr"></input></div>
+	</div>
+	<div class="ctrl" style="width: 100%"> <p onclick="lSlr.value = 10; render()" style="text-align: center">Length</p> <input min="1" max="255" value="10" class="s" type="range" id="lSlr"></input></div>
+	<canvas style="margin: none; padding: none;" id="sinWavCanv" height="80"></canvas>
+	
+</body>
+<script src="index.js"></script>
