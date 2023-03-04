@@ -12,13 +12,6 @@ function tint (image, color, opacity = 0.5) {
     ctx.restore();
     return canvas;
 }
-/*
-class Object {
-    constructor () {
-
-    }
-}
-*/
 
 class Spaceship {
     ax = 0;
@@ -62,7 +55,7 @@ class Spaceship {
         ctx.translate(...midpoint);
         ctx.rotate(angle);
         let velocity = Math.sqrt(this.vx**2 + this.vy**2)
-        let texture = tint(this.texture, 'rgb(255, 0, 0)',  velocity > 20 ? 0.3 : (velocity * 0.05) * 0.3)
+        let texture = tint(this.texture, 'rgb(255, 89, 0)',  velocity > 20 ? 0.3 : (velocity * 0.05) * 0.3)
         //let { texture } = this;
         ctx.drawImage(
             texture,
@@ -160,6 +153,7 @@ player
 game.add(player);
 // main game loop, causes ticks and frames
 ;(async function main () {
+    await new Promise(res => spaceshipTexture.addEventListener("load", res))
     while (true) {
         await new Promise(res => window.requestAnimationFrame(res));
         game.tick();
